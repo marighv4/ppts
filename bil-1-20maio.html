@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +11,29 @@
     <!-- FontAwesome para ícones premium -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
+    <!-- Script de contingência inteligente para o Logótipo V4 -->
+    <script>
+        function handleLogoError(img, size) {
+            const height = size === 'large' ? '75px' : '22px';
+            const className = size === 'large' ? 'v4-large-logo' : 'v4-logo-img';
+            
+            // Desenha um vetor SVG oficial da V4 de alta nitidez caso o link externo seja bloqueado
+            const svg = `
+            <svg class="${className}" viewBox="0 0 350 80" style="height: ${height}; display: inline-block; vertical-align: middle;" xmlns="http://www.w3.org/2000/svg">
+                <!-- Símbolo V4 -->
+                <rect width="80" height="80" rx="14" fill="#E30613"/>
+                <path d="M18 20 H30 L44 55 L32 55 Z" fill="#FFFFFF"/>
+                <path d="M44 55 L58 20 H70 L50 68 H38 Z" fill="#FFFFFF"/>
+                <path d="M50 44 H70 V52 H50 Z" fill="#FFFFFF"/>
+                <path d="M60 20 H70 V68 H60 Z" fill="#FFFFFF"/>
+                <!-- Texto V4 Company -->
+                <text x="95" y="58" fill="#FFFFFF" font-family="'Montserrat', sans-serif" font-weight="900" font-size="40" letter-spacing="-1.5">V4 COMPANY</text>
+            </svg>`;
+            
+            img.outerHTML = svg;
+        }
+    </script>
+
     <style>
         /* 1. VARIÁVEIS DE MARCA V4 COMPANY */
         :root {
@@ -79,7 +102,7 @@
             transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* MARCA D'ÁGUA V4 COM LOGO UPADO E TAGLINE ATUALIZADA */
+        /* MARCA D'ÁGUA V4 COM LOGOTIPO E TAGLINE ATUALIZADA */
         .brand-watermark {
             position: absolute;
             top: 30px;
@@ -218,7 +241,14 @@
             letter-spacing: -0.5px;
         }
 
-        /* CARDS / GRIDS */
+        /* GRELHAS / CARDS */
+        .v4-grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            width: 100%;
+        }
+
         .v4-grid-3 {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -226,11 +256,18 @@
             width: 100%;
         }
 
+        .v4-grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            width: 100%;
+        }
+
         .v4-card {
             background-color: var(--v4-gray-dark);
             border: 1px solid var(--v4-border);
             border-radius: 6px;
-            padding: 30px;
+            padding: 35px 30px;
             position: relative;
             overflow: hidden;
             transition: all 0.3s ease;
@@ -259,7 +296,7 @@
         }
 
         .v4-card-metric {
-            font-size: 42px;
+            font-size: 46px;
             font-weight: 900;
             color: var(--v4-text-main);
             letter-spacing: -1.5px;
@@ -270,13 +307,13 @@
         }
 
         .v4-card-metric span.currency {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 700;
             color: var(--v4-red);
         }
 
         .v4-card-title {
-            font-size: 11px;
+            font-size: 12px;
             text-transform: uppercase;
             letter-spacing: 2px;
             color: var(--v4-text-muted);
@@ -285,9 +322,9 @@
         }
 
         .v4-card-footer {
-            font-size: 12px;
+            font-size: 13px;
             color: var(--v4-text-muted);
-            line-height: 1.4;
+            line-height: 1.5;
         }
 
         .v4-card-footer strong {
@@ -508,8 +545,8 @@
 
         .v4-table th {
             background-color: var(--v4-gray-light);
-            padding: 18px 25px;
-            font-size: 12px;
+            padding: 16px 20px;
+            font-size: 11px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -518,8 +555,8 @@
         }
 
         .v4-table td {
-            padding: 18px 25px;
-            font-size: 14px;
+            padding: 16px 20px;
+            font-size: 13px;
             border-bottom: 1px solid var(--v4-border);
             background-color: var(--v4-dark);
         }
@@ -534,14 +571,14 @@
 
         .v4-table td strong {
             color: var(--v4-red);
-            font-size: 16px;
+            font-size: 15px;
         }
 
         /* JORNADA DO LEAD */
         .journey-container {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
             width: 100%;
             position: relative;
         }
@@ -550,7 +587,7 @@
             background: var(--v4-gray-dark);
             border: 1px solid var(--v4-border);
             border-radius: 4px;
-            padding: 25px;
+            padding: 20px 15px;
             text-align: center;
             z-index: 2;
         }
@@ -560,17 +597,17 @@
         }
 
         .journey-number {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             background-color: var(--v4-gray-light);
             border: 2px solid var(--v4-border);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 15px auto;
+            margin: 0 auto 12px auto;
             font-weight: 900;
-            font-size: 14px;
+            font-size: 13px;
             color: var(--v4-text-muted);
         }
 
@@ -582,7 +619,7 @@
         }
 
         .journey-val {
-            font-size: 32px;
+            font-size: 26px;
             font-weight: 900;
             letter-spacing: -1px;
             margin-bottom: 5px;
@@ -593,7 +630,7 @@
         }
 
         .journey-label {
-            font-size: 11px;
+            font-size: 10px;
             text-transform: uppercase;
             font-weight: 700;
             letter-spacing: 1px;
@@ -815,7 +852,7 @@
 
         <!-- Marca d'água V4 com Logotipo e nova Tagline -->
         <div class="brand-watermark">
-            <img src="v4-company-logo-vector-removebg-preview.png" alt="V4 Company" class="v4-logo-img">
+            <img src="https://files.inhire.app/pages/career/logo_v4company.png" alt="V4 Company" class="v4-logo-img" onerror="handleLogoError(this, 'small')">
             <span class="v4-tagline">Nosso negócio é vender o seu</span>
         </div>
 
@@ -932,21 +969,17 @@
                     <h2 class="slide-title">Eficiência Financeira do Funil</h2>
                 </div>
                 <p class="slide-description">Custo real para geração de valor em cada etapa de conversão comercial.</p>
-                <div class="v4-grid-3">
+                <!-- Alterado de v4-grid-4 para v4-grid-2 para manter a estética perfeita -->
+                <div class="v4-grid-2">
                     <div class="v4-card">
-                        <div class="v4-card-title">Custo por Lead (CPL)</div>
+                        <div class="v4-card-title">CPL Bruto</div>
                         <div class="v4-card-metric"><span class="currency">R$</span>12,72</div>
                         <div class="v4-card-footer">Custo médio por contato bruto gerado na LP (208 leads totais).</div>
                     </div>
                     <div class="v4-card">
                         <div class="v4-card-title">CPL Qualificado</div>
                         <div class="v4-card-metric"><span class="currency">R$</span>22,81</div>
-                        <div class="v4-card-footer">Eficiência sobre o lead que atende aos critérios (116 leads).</div>
-                    </div>
-                    <div class="v4-card">
-                        <div class="v4-card-title">Custo por Reunião</div>
-                        <div class="v4-card-metric"><span class="currency">R$</span>330,69</div>
-                        <div class="v4-card-footer">Investimento necessário para gerar uma agenda (8 agendamentos).</div>
+                        <div class="v4-card-footer">Eficiência sobre o lead que atende aos critérios e perfil ideal (116 leads).</div>
                     </div>
                 </div>
             </div>
@@ -1014,8 +1047,13 @@
                             </tr>
                             <tr>
                                 <td>Qualificados > Agendados</td>
-                                <td><strong>6,90%</strong></td>
-                                <td>Oportunidade latente para otimização do processo comercial de agendamento.</td>
+                                <td><strong>2,59%</strong></td>
+                                <td>Estágio de oportunidade para otimização do processo de prospecção comercial (3 agendamentos).</td>
+                            </tr>
+                            <tr>
+                                <td>Agendados > Confirmados</td>
+                                <td><strong>33,33%</strong></td>
+                                <td>Demonstra necessidade de reforço no follow-up preventivo de faltas (1 confirmação).</td>
                             </tr>
                         </tbody>
                     </table>
@@ -1028,7 +1066,7 @@
                     <span>Caminho do ROI</span>
                     <h2 class="slide-title">Jornada Comercial de Maio</h2>
                 </div>
-                <p class="slide-description">Conversão do lead desde o cadastro inicial até as metas de vendas agendadas.</p>
+                <p class="slide-description">Conversão do lead desde o cadastro inicial até as metas de reuniões e faturamento.</p>
                 <div class="journey-container">
                     <div class="journey-step completed">
                         <div class="journey-number">01</div>
@@ -1042,12 +1080,16 @@
                     </div>
                     <div class="journey-step completed">
                         <div class="journey-number">03</div>
-                        <div class="journey-val">8</div>
+                        <div class="journey-val">3</div>
                         <div class="journey-label">Reuniões Agendadas</div>
                     </div>
-                    <!-- A última parte alterada de "Em Aberto" para "Nenhuma" -->
-                    <div class="journey-step" style="border-style: dashed;">
+                    <div class="journey-step completed">
                         <div class="journey-number">04</div>
+                        <div class="journey-val">1</div>
+                        <div class="journey-label">Reunião Confirmada</div>
+                    </div>
+                    <div class="journey-step" style="border-style: dashed;">
+                        <div class="journey-number">05</div>
                         <div class="journey-val" style="color: var(--v4-text-muted);">Nenhuma</div>
                         <div class="journey-label">Vendas</div>
                     </div>
@@ -1066,69 +1108,33 @@
                         <div class="strategy-item">
                             <div class="strategy-icon"><i class="fa-solid fa-bullseye"></i></div>
                             <div class="strategy-text">
-                                <h4>Alavancagem de Agendamentos</h4>
-                                <p>Aumentar a taxa de conversão de leads qualificados para agendados (hoje em 6,90%). Um aumento para 12% dobraria o volume de reuniões.</p>
+                                <h4>Otimização da Abordagem de Leads</h4>
+                                <p>A taxa de agendamento de qualificados está em 2,59% (3 de 116). O foco estratégico inicial é qualificar as abordagens para aumentar esta taxa de agendamentos na base.</p>
                             </div>
                         </div>
                         <div class="strategy-item">
                             <div class="strategy-icon"><i class="fa-solid fa-chart-line"></i></div>
                             <div class="strategy-text">
-                                <h4>Redução do Custo de Consulta</h4>
-                                <p>Com maior eficiência comercial do time de SDRs, diluímos o custo atual de R$ 330,69 por consulta agendada.</p>
+                                <h4>Trabalho de No-Show (Não Comparecimento)</h4>
+                                <p>Com 3 agendamentos e 1 confirmação (33,33%), a perda de leads no caminho da reunião é crítica. Propõe-se processos de confirmação ativa via WhatsApp.</p>
                             </div>
                         </div>
                     </div>
                     <div class="strategy-badge">
                         <h3>Visão Estratégica V4</h3>
                         <div class="big-statement">
-                            "Menos volume desperdiçado, maior aproveitamento comercial da base qualificada."
+                            "Maximizar a eficiência comercial na base existente traz mais ROI do que injetar mais verba de mídia."
                         </div>
                         <p style="font-size: 12px; color: var(--v4-text-muted); margin-top: 15px; font-style: italic;">
-                            - Foco prioritário: Script e tempo de resposta (LDR/SDR) para engajar os 40 leads classificados como 'Mornos'.
+                            - Foco prioritário: Mapear o funil de abordagem de SDR para os 40 leads classificados como 'Mornos'.
                         </p>
                     </div>
                 </div>
             </div>
 
-            <!-- SLIDE 10: PRÓXIMOS PASSOS -->
-            <div class="slide" id="slide-9">
-                <div class="slide-title-wrapper">
-                    <span>Roadmap</span>
-                    <h2 class="slide-title">Ações Recomendadas</h2>
-                </div>
-                <p class="slide-description">Próximos passos fundamentais baseados na análise dos dados coletados em Maio.</p>
-                <div class="strategy-grid">
-                    <div class="strategy-list">
-                        <div class="strategy-item">
-                            <div class="strategy-icon"><i class="fa-solid fa-rotate"></i></div>
-                            <div class="strategy-text">
-                                <h4>Remarketing Focado nos "Mornos"</h4>
-                                <p>Criação de campanhas de anúncios focadas no público morno (40 leads) ofertando cases e prova social direta.</p>
-                            </div>
-                        </div>
-                        <div class="strategy-item">
-                            <div class="strategy-icon"><i class="fa-solid fa-clock"></i></div>
-                            <div class="strategy-text">
-                                <h4>SLA de Atendimento SDR</h4>
-                                <p>Implementação de protocolo de primeiro contato de no máximo 5 minutos após a conversão, maximizando a taxa de agendamentos.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="strategy-list">
-                        <div class="strategy-item">
-                            <div class="strategy-icon"><i class="fa-solid fa-shield-halved"></i></div>
-                            <div class="strategy-text">
-                                <h4>Nutrição de Leads Frios</h4>
-                                <p>Nutrição inteligente e automatizada por WhatsApp/E-mail para reaquecer os 69 leads frios sem esforço humano comercial.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SLIDE 11: ENCERRAMENTO / Q&A -->
-            <div class="slide slide-outro" id="slide-10">
-                <img src="v4-company-logo-vector-removebg-preview.png" alt="V4 Company Logo" class="v4-large-logo">
+            <!-- SLIDE 10: ENCERRAMENTO / Q&A -->
+            <div class="slide slide-outro" id="slide-9">
+                <img src="https://files.inhire.app/pages/career/logo_v4company.png" alt="V4 Company Logo" class="v4-large-logo" onerror="handleLogoError(this, 'large')">
                 <h2>Não vendemos assessoria.<br>Geramos <span>Resultados</span>.</h2>
                 <p>Relatório de Performance Comercial • Maio</p>
                 <div class="v4-signature">Nosso negócio é vender o seu</div>
@@ -1143,7 +1149,7 @@
             </div>
             <div class="footer-controls">
                 <div class="slide-counter">
-                    <span class="current" id="currentSlideNum">1</span> / <span id="totalSlidesNum">11</span>
+                    <span class="current" id="currentSlideNum">1</span> / <span id="totalSlidesNum">10</span>
                 </div>
                 <button class="nav-btn" onclick="prevSlide()" title="Anterior (Seta Esquerda)"><i class="fa-solid fa-chevron-left"></i></button>
                 <button class="nav-btn" onclick="nextSlide()" title="Próximo (Seta Direita / Espaço)"><i class="fa-solid fa-chevron-right"></i></button>
