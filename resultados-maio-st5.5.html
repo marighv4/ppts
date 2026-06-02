@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apresentação de Resultados - V4 Company</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        v4red: '#E50000',
+                        v4dark: '#0a0a0a',
+                        v4gray: '#1a1a1a',
+                        v4lightgray: '#333333'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        
+        .slide {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            min-height: 100vh;
+            width: 100%;
+        }
+        
+        .slide.active {
+            display: flex;
+            opacity: 1;
+            animation: slideUp 0.6s ease-out forwards;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .metric-card {
+            background: linear-gradient(145deg, #1a1a1a, #111111);
+            border-left: 4px solid #E50000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: transform 0.3s;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .table-row {
+            border-bottom: 1px solid #333;
+        }
+        
+        .table-row:last-child {
+            border-bottom: none;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #E50000; border-radius: 4px; }
+    </style>
+</head>
+<body class="antialiased flex flex-col justify-between min-h-screen">
+
+    <!-- Header fixo para manter o branding -->
+    <header class="fixed top-0 w-full p-6 flex justify-between items-center z-50 bg-gradient-to-b from-v4dark to-transparent">
+        <div class="text-2xl font-black tracking-tighter">
+            <span class="text-white">V4</span><span class="text-v4red"> COMPANY</span>
+        </div>
+        <div class="text-sm font-light tracking-widest uppercase text-gray-400">
+            Relatório de Performance
+        </div>
+    </header>
+
+    <!-- Container dos Slides -->
+    <main id="presentation-container" class="flex-grow pt-20 pb-24">
+        
+        <!-- Slide 1: Capa -->
+        <section class="slide active flex-col justify-center items-center text-center px-4">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-v4red font-bold text-xl md:text-2xl mb-4 tracking-widest uppercase">Assessoria de Growth</h2>
+                <h1 class="text-5xl md:text-7xl font-black mb-8 leading-tight">
+                    RELATÓRIO DE <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-v4red to-red-600">
+                        AQUISIÇÃO
+                    </span>
+                </h1>
+                <p class="text-gray-400 text-lg md:text-xl font-light mb-12">
+                    Período analisado: 01 de Maio a 31 de Maio de 2026<br>
+                    Fontes: Google Ads & Meta Ads
+                </p>
+                <button onclick="nextSlide()" class="bg-v4red hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full transition-colors duration-300 flex items-center mx-auto space-x-2">
+                    <span>Iniciar Apresentação</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Slide 2: Resumo Geral -->
+        <section class="slide flex-col justify-center px-6 md:px-20">
+            <div class="w-full max-w-6xl mx-auto">
+                <h2 class="text-4xl font-black mb-2">Visão <span class="text-v4red">Geral</span></h2>
+                <p class="text-gray-400 mb-10">Consolidado das plataformas no período.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Cards de Resumo -->
+                    <div class="metric-card p-8 rounded-lg">
+                        <div class="text-v4red mb-4 text-3xl"><i class="fas fa-wallet"></i></div>
+                        <h3 class="text-gray-400 text-sm uppercase tracking-wider mb-2">Investimento Total</h3>
+                        <p class="text-4xl font-black">R$ 3.760,43</p>
+                    </div>
+                    
+                    <div class="metric-card p-8 rounded-lg">
+                        <div class="text-v4red mb-4 text-3xl"><i class="fas fa-users"></i></div>
+                        <h3 class="text-gray-400 text-sm uppercase tracking-wider mb-2">Instalações Totais</h3>
+                        <p class="text-4xl font-black">5.504</p>
+                    </div>
+
+                    <div class="metric-card p-8 rounded-lg">
+                        <div class="text-v4red mb-4 text-3xl"><i class="fas fa-bullseye"></i></div>
+                        <h3 class="text-gray-400 text-sm uppercase tracking-wider mb-2">Custo Médio / Instalação</h3>
+                        <p class="text-4xl font-black">R$ 0,68</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 3: Google Ads -->
+        <section class="slide flex-col justify-center px-6 md:px-20">
+            <div class="w-full max-w-6xl mx-auto">
+                <div class="flex items-center mb-8">
+                    <i class="fab fa-google text-4xl mr-4"></i>
+                    <div>
+                        <h2 class="text-4xl font-black">Google <span class="text-v4red">Ads</span></h2>
+                        <p class="text-gray-400">Desempenho da campanha de App Install.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                    <div class="bg-v4gray p-6 rounded-lg border border-v4lightgray">
+                        <p class="text-xs text-gray-500 uppercase">Custo Total</p>
+                        <p class="text-2xl font-bold text-white">R$ 2.116,68</p>
+                    </div>
+                    <div class="bg-v4gray p-6 rounded-lg border border-v4lightgray">
+                        <p class="text-xs text-gray-500 uppercase">Instalações</p>
+                        <p class="text-2xl font-bold text-v4red">4.640,00</p>
+                    </div>
+                    <div class="bg-v4gray p-6 rounded-lg border border-v4lightgray">
+                        <p class="text-xs text-gray-500 uppercase">Custo / Instalação</p>
+                        <p class="text-2xl font-bold text-white">R$ 0,46</p>
+                    </div>
+                    <div class="bg-v4gray p-6 rounded-lg border border-v4lightgray">
+                        <p class="text-xs text-gray-500 uppercase">Taxa de Instalação</p>
+                        <p class="text-2xl font-bold text-white">34,47%</p>
+                    </div>
+                </div>
+
+                <div class="bg-v4gray rounded-lg overflow-hidden border border-v4lightgray w-full overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead class="bg-black text-gray-400 text-xs uppercase tracking-wider">
+                            <tr>
+                                <th class="p-4">Campanha</th>
+                                <th class="p-4">Status</th>
+                                <th class="p-4">Tipo</th>
+                                <th class="p-4 text-right">Custo</th>
+                                <th class="p-4 text-right">Instalações</th>
+                                <th class="p-4 text-right">CPA</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm font-medium">
+                            <tr class="table-row hover:bg-v4lightgray transition-colors">
+                                <td class="p-4 text-v4red font-bold">[V4] [Android] APP Install</td>
+                                <td class="p-4"><span class="bg-green-900 text-green-300 py-1 px-2 rounded text-xs">Qualificado</span></td>
+                                <td class="p-4">App</td>
+                                <td class="p-4 text-right">R$ 2116,68</td>
+                                <td class="p-4 text-right">4.640,00</td>
+                                <td class="p-4 text-right">R$ 0,46</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 4: Meta Ads -->
+        <section class="slide flex-col justify-center px-6 md:px-20">
+            <div class="w-full max-w-6xl mx-auto">
+                <div class="flex items-center mb-8">
+                    <i class="fab fa-meta text-4xl mr-4 text-blue-500"></i>
+                    <div>
+                        <h2 class="text-4xl font-black">Meta <span class="text-v4red">Ads</span></h2>
+                        <p class="text-gray-400">Detalhamento dos conjuntos de anúncios.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+                    <div class="bg-v4gray p-6 rounded-lg border border-v4lightgray">
+                        <p class="text-xs text-gray-500 uppercase">Valor Usado (Total)</p>
+                        <p class="text-2xl font-bold text-white">R$ 1.643,75</p>
+                    </div>
+                    <div class="bg-v4gray p-6 rounded-lg border border-v4lightgray">
+                        <p class="text-xs text-gray-500 uppercase">Instalações Totais</p>
+                        <p class="text-2xl font-bold text-v4red">864</p>
+                    </div>
+                    <div class="bg-v4gray p-6 rounded-lg border border-v4lightgray">
+                        <p class="text-xs text-gray-500 uppercase">Custo Médio / Instalação</p>
+                        <p class="text-2xl font-bold text-white">R$ 1,90</p>
+                    </div>
+                </div>
+
+                <div class="bg-v4gray rounded-lg overflow-hidden border border-v4lightgray w-full overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead class="bg-black text-gray-400 text-xs uppercase tracking-wider">
+                            <tr>
+                                <th class="p-4">Nome do Anúncio</th>
+                                <th class="p-4">Conjunto</th>
+                                <th class="p-4 text-right">Valor Usado</th>
+                                <th class="p-4 text-right">Instalações</th>
+                                <th class="p-4 text-right">Custo / Inst.</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm font-medium">
+                            <tr class="table-row hover:bg-v4lightgray transition-colors">
+                                <td class="p-4">AD1 - Inspirado em um clássico</td>
+                                <td class="p-4 text-gray-400 text-xs">[Android] ...</td>
+                                <td class="p-4 text-right">R$ 1542,68</td>
+                                <td class="p-4 text-right text-v4red font-bold">852</td>
+                                <td class="p-4 text-right">R$ 1,81</td>
+                            </tr>
+                            <tr class="table-row hover:bg-v4lightgray transition-colors">
+                                <td class="p-4">AD1 - Inspirado em um clássico</td>
+                                <td class="p-4 text-gray-400 text-xs">[Windows] adv+...</td>
+                                <td class="p-4 text-right">R$ 13,72</td>
+                                <td class="p-4 text-right text-v4red font-bold">10</td>
+                                <td class="p-4 text-right">R$ 1,37</td>
+                            </tr>
+                            <tr class="table-row hover:bg-v4lightgray transition-colors">
+                                <td class="p-4">AD2 - Entre agora e jogue</td>
+                                <td class="p-4 text-gray-400 text-xs">[Windows] adv+...</td>
+                                <td class="p-4 text-right">R$ 87,35</td>
+                                <td class="p-4 text-right text-v4red font-bold">2</td>
+                                <td class="p-4 text-right">R$ 43,67</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5: Criativos (Anexo) -->
+        <section class="slide flex-col justify-center px-6 md:px-20">
+            <div class="w-full max-w-6xl mx-auto">
+                <div class="flex items-center mb-8">
+                    <i class="fas fa-images text-4xl mr-4 text-v4red"></i>
+                    <div>
+                        <h2 class="text-4xl font-black">Anexo: <span class="text-v4red">Criativos</span></h2>
+                        <p class="text-gray-400">Imagens correspondentes aos anúncios veiculados no Meta Ads.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- AD 1 -->
+                    <div class="bg-v4gray p-6 rounded-lg border border-v4lightgray hover:border-v4red transition-colors duration-300">
+                        <h3 class="text-lg font-bold text-white mb-4 border-b border-gray-700 pb-2">AD1 - Inspirado em um clássico</h3>
+                        <div class="w-full aspect-video bg-black rounded overflow-hidden flex items-center justify-center relative">
+                             <img src="https://www.facebook.com/ads/image/?d=AQJqN98Eu_unD5wLQWJEPE02kDWZiZiV6sc7dQGik2z0fKhfvaPMLMHXtARMQGJKaCCcqtjlWHABoqN14hmcIO8mHsFx1pYGwZog28dmDo-lHlh3QtzVa1y5ajQZPnoSZW6HWr4okrah5V7rYMopbOqo" alt="Criativo AD1 - Inspirado em um clássico" class="max-w-full max-h-full object-contain">
+                        </div>
+                    </div>
+                    
+                    <!-- AD 2 -->
+                    <div class="bg-v4gray p-6 rounded-lg border border-v4lightgray hover:border-v4red transition-colors duration-300">
+                        <h3 class="text-lg font-bold text-white mb-4 border-b border-gray-700 pb-2">AD2 - Entre agora e jogue</h3>
+                        <div class="w-full aspect-video bg-black rounded overflow-hidden flex items-center justify-center relative">
+                             <img src="https://www.facebook.com/ads/image/?d=AQLLDOHni-yUHFWkgkAkRjLumGVVeJl8JhOAQ1wZk0ubpIktnyygbCyGmMw6XMoR0IMNreIvk0TCGXfuzMto6SJh4sL_2oRzqvDayfAGteNju2cB9gZbIUVvduq_BwVYgvOoGqXaqHEzPa2twN_QRef-" alt="Criativo AD2 - Entre agora e jogue" class="max-w-full max-h-full object-contain">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 6: O que foi feito -->
+        <section class="slide flex-col justify-center px-6 md:px-20">
+            <div class="w-full max-w-4xl mx-auto">
+                <div class="flex items-center mb-10">
+                    <i class="fas fa-clipboard-check text-4xl mr-4 text-v4red"></i>
+                    <div>
+                        <h2 class="text-4xl font-black">O que foi <span class="text-v4red">feito</span></h2>
+                        <p class="text-gray-400">Ações estratégicas realizadas no período analisado.</p>
+                    </div>
+                </div>
+
+                <div class="bg-v4gray p-8 md:p-12 rounded-lg border border-v4lightgray shadow-lg">
+                    <ul class="space-y-8">
+                        <li class="flex items-start">
+                            <div class="bg-v4red rounded-full p-2 mr-6 mt-1 flex-shrink-0">
+                                <i class="fas fa-check text-white text-sm"></i>
+                            </div>
+                            <span class="text-xl md:text-2xl text-white font-light">Implementação de nova estrutura de campanhas e criativos;</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="bg-v4red rounded-full p-2 mr-6 mt-1 flex-shrink-0">
+                                <i class="fas fa-check text-white text-sm"></i>
+                            </div>
+                            <span class="text-xl md:text-2xl text-white font-light">Criação de nova campanha de remarketing com público novo;</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Controles de Navegação -->
+    <footer class="fixed bottom-0 w-full p-4 bg-v4dark border-t border-v4lightgray flex justify-between items-center z-50">
+        <div class="flex space-x-2 text-gray-500" id="slide-indicators">
+            <!-- Indicadores gerados via JS -->
+        </div>
+        
+        <div class="flex space-x-4">
+            <button onclick="prevSlide()" class="p-2 rounded-full border border-gray-600 text-gray-400 hover:text-white hover:border-white transition-colors w-10 h-10 flex items-center justify-center">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button onclick="nextSlide()" class="p-2 rounded-full border border-v4red bg-v4red text-white hover:bg-red-700 transition-colors w-10 h-10 flex items-center justify-center">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </footer>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+        const indicatorsContainer = document.getElementById('slide-indicators');
+
+        // Setup dos indicadores
+        slides.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.className = `w-2 h-2 rounded-full transition-all duration-300 ${index === 0 ? 'bg-v4red w-6' : 'bg-gray-600'}`;
+            dot.id = `dot-${index}`;
+            indicatorsContainer.appendChild(dot);
+        });
+
+        function updateIndicators() {
+            slides.forEach((_, index) => {
+                const dot = document.getElementById(`dot-${index}`);
+                if (index === currentSlide) {
+                    dot.className = 'w-6 h-2 rounded-full transition-all duration-300 bg-v4red';
+                } else {
+                    dot.className = 'w-2 h-2 rounded-full transition-all duration-300 bg-gray-600';
+                }
+            });
+        }
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[index].classList.add('active');
+            updateIndicators();
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        }
+
+        // Navegação por teclado
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'Space') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+    </script>
+</body>
+</html>
+```
