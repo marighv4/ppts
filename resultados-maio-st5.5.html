@@ -117,26 +117,26 @@
         <section class="slide flex-col justify-center px-6 md:px-20">
             <div class="w-full max-w-6xl mx-auto">
                 <h2 class="text-4xl font-black mb-2">Visão <span class="text-v4red">Geral</span></h2>
-                <p class="text-gray-400 mb-10">Consolidado das plataformas no período.</p>
+                <p class="text-gray-400 mb-10">Consolidado das plataformas no período (Google + Meta).</p>
                 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <!-- Cards de Resumo -->
                     <div class="metric-card p-8 rounded-lg">
                         <div class="text-v4red mb-4 text-3xl"><i class="fas fa-wallet"></i></div>
                         <h3 class="text-gray-400 text-sm uppercase tracking-wider mb-2">Investimento Total</h3>
-                        <p class="text-4xl font-black">R$ 3.760,43</p>
+                        <p class="text-4xl font-black">R$ 4.076,49</p>
                     </div>
                     
                     <div class="metric-card p-8 rounded-lg">
                         <div class="text-v4red mb-4 text-3xl"><i class="fas fa-users"></i></div>
                         <h3 class="text-gray-400 text-sm uppercase tracking-wider mb-2">Instalações Totais</h3>
-                        <p class="text-4xl font-black">5.504</p>
+                        <p class="text-4xl font-black">5.563</p>
                     </div>
 
                     <div class="metric-card p-8 rounded-lg">
                         <div class="text-v4red mb-4 text-3xl"><i class="fas fa-bullseye"></i></div>
                         <h3 class="text-gray-400 text-sm uppercase tracking-wider mb-2">Custo Médio / Instalação</h3>
-                        <p class="text-4xl font-black">R$ 0,68</p>
+                        <p class="text-4xl font-black">R$ 0,73</p>
                     </div>
                 </div>
             </div>
@@ -199,29 +199,94 @@
             </div>
         </section>
 
-        <!-- Slide 4: Meta Ads -->
+        <!-- Slide 4: Meta Ads (Campanhas) -->
         <section class="slide flex-col justify-center px-6 md:px-20">
             <div class="w-full max-w-6xl mx-auto">
                 <div class="flex items-center mb-8">
                     <i class="fab fa-meta text-4xl mr-4 text-blue-500"></i>
                     <div>
                         <h2 class="text-4xl font-black">Meta <span class="text-v4red">Ads</span></h2>
-                        <p class="text-gray-400">Detalhamento dos conjuntos de anúncios.</p>
+                        <p class="text-gray-400">Detalhamento consolidado por Campanhas.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                    <div class="bg-v4gray p-6 rounded-lg border border-v4lightgray">
+                        <p class="text-xs text-gray-500 uppercase">Valor Usado (Total)</p>
+                        <p class="text-2xl font-bold text-white">R$ 1.959,81</p>
+                    </div>
+                    <div class="bg-v4gray p-6 rounded-lg border border-v4lightgray">
+                        <p class="text-xs text-gray-500 uppercase">Impressões</p>
+                        <p class="text-2xl font-bold text-v4red">120.458</p>
+                    </div>
+                    <div class="bg-v4gray p-6 rounded-lg border border-v4lightgray">
+                        <p class="text-xs text-gray-500 uppercase">Instalações (Camp. Download)</p>
+                        <p class="text-2xl font-bold text-v4red">923</p>
+                    </div>
+                    <div class="bg-v4gray p-6 rounded-lg border border-v4lightgray">
+                        <p class="text-xs text-gray-500 uppercase">CPC Médio (Global)</p>
+                        <p class="text-2xl font-bold text-white">R$ 0,40</p>
+                    </div>
+                </div>
+
+                <div class="bg-v4gray rounded-lg overflow-hidden border border-v4lightgray w-full overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead class="bg-black text-gray-400 text-xs uppercase tracking-wider">
+                            <tr>
+                                <th class="p-4">Campanha</th>
+                                <th class="p-4 text-right">Impressões</th>
+                                <th class="p-4 text-right">Cliques</th>
+                                <th class="p-4 text-right">Resultados (Instalações)</th>
+                                <th class="p-4 text-right">CPA Médio</th>
+                                <th class="p-4 text-right">Valor Usado</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm font-medium">
+                            <tr class="table-row hover:bg-v4lightgray transition-colors">
+                                <td class="p-4 text-v4red font-bold">[V4] Download - Conversão</td>
+                                <td class="p-4 text-right">97.207</td>
+                                <td class="p-4 text-right">4.408</td>
+                                <td class="p-4 text-right text-white font-bold">923</td>
+                                <td class="p-4 text-right">R$ 2,01</td>
+                                <td class="p-4 text-right">R$ 1.854,85</td>
+                            </tr>
+                            <tr class="table-row hover:bg-v4lightgray transition-colors">
+                                <td class="p-4 font-bold text-white">[V4] Vis ao perfil</td>
+                                <td class="p-4 text-right">23.251</td>
+                                <td class="p-4 text-right">418</td>
+                                <td class="p-4 text-right text-gray-400">414 (Visitas)</td>
+                                <td class="p-4 text-right">R$ 0,25</td>
+                                <td class="p-4 text-right">R$ 104,96</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5: Meta Ads (Anúncios) -->
+        <section class="slide flex-col justify-center px-6 md:px-20">
+            <div class="w-full max-w-6xl mx-auto">
+                <div class="flex items-center mb-8">
+                    <i class="fab fa-meta text-4xl mr-4 text-blue-500"></i>
+                    <div>
+                        <h2 class="text-4xl font-black">Meta <span class="text-v4red">Ads</span></h2>
+                        <p class="text-gray-400">Top Anúncios: Campanha de Download (Instalações).</p>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
                     <div class="bg-v4gray p-6 rounded-lg border border-v4lightgray">
-                        <p class="text-xs text-gray-500 uppercase">Valor Usado (Total)</p>
-                        <p class="text-2xl font-bold text-white">R$ 1.643,75</p>
+                        <p class="text-xs text-gray-500 uppercase">Valor Usado (Camp. Download)</p>
+                        <p class="text-2xl font-bold text-white">R$ 1.854,85</p>
                     </div>
                     <div class="bg-v4gray p-6 rounded-lg border border-v4lightgray">
-                        <p class="text-xs text-gray-500 uppercase">Instalações Totais</p>
-                        <p class="text-2xl font-bold text-v4red">864</p>
+                        <p class="text-xs text-gray-500 uppercase">Instalações (Camp. Download)</p>
+                        <p class="text-2xl font-bold text-v4red">923</p>
                     </div>
                     <div class="bg-v4gray p-6 rounded-lg border border-v4lightgray">
                         <p class="text-xs text-gray-500 uppercase">Custo Médio / Instalação</p>
-                        <p class="text-2xl font-bold text-white">R$ 1,90</p>
+                        <p class="text-2xl font-bold text-white">R$ 2,01</p>
                     </div>
                 </div>
 
@@ -231,32 +296,46 @@
                             <tr>
                                 <th class="p-4">Nome do Anúncio</th>
                                 <th class="p-4">Conjunto</th>
-                                <th class="p-4 text-right">Valor Usado</th>
                                 <th class="p-4 text-right">Instalações</th>
                                 <th class="p-4 text-right">Custo / Inst.</th>
+                                <th class="p-4 text-right">Valor Usado</th>
                             </tr>
                         </thead>
                         <tbody class="text-sm font-medium">
                             <tr class="table-row hover:bg-v4lightgray transition-colors">
-                                <td class="p-4">AD1 - Inspirado em um clássico</td>
-                                <td class="p-4 text-gray-400 text-xs">[Android] ...</td>
-                                <td class="p-4 text-right">R$ 1542,68</td>
+                                <td class="p-4 font-bold text-white">AD1 - Inspirado em um clássico</td>
+                                <td class="p-4 text-gray-400 text-xs">[Android] adv+ interesses</td>
                                 <td class="p-4 text-right text-v4red font-bold">852</td>
                                 <td class="p-4 text-right">R$ 1,81</td>
+                                <td class="p-4 text-right">R$ 1.542,68</td>
                             </tr>
                             <tr class="table-row hover:bg-v4lightgray transition-colors">
-                                <td class="p-4">AD1 - Inspirado em um clássico</td>
-                                <td class="p-4 text-gray-400 text-xs">[Windows] adv+...</td>
-                                <td class="p-4 text-right">R$ 13,72</td>
+                                <td class="p-4 font-bold text-white">ADV3 - Entre agora e jogue</td>
+                                <td class="p-4 text-gray-400 text-xs">[Android] adv+ interesses</td>
+                                <td class="p-4 text-right text-v4red font-bold">47</td>
+                                <td class="p-4 text-right">R$ 1,37</td>
+                                <td class="p-4 text-right">R$ 64,47</td>
+                            </tr>
+                            <tr class="table-row hover:bg-v4lightgray transition-colors">
+                                <td class="p-4 font-bold text-white">AD2 - Entre agora e jogue</td>
+                                <td class="p-4 text-gray-400 text-xs">[Android] adv+ interesses</td>
+                                <td class="p-4 text-right text-v4red font-bold">15</td>
+                                <td class="p-4 text-right">R$ 2,38</td>
+                                <td class="p-4 text-right">R$ 35,71</td>
+                            </tr>
+                            <tr class="table-row hover:bg-v4lightgray transition-colors">
+                                <td class="p-4 font-bold text-white">AD1 - Inspirado em um clássico</td>
+                                <td class="p-4 text-gray-400 text-xs">[Windows] adv+ interesses</td>
                                 <td class="p-4 text-right text-v4red font-bold">10</td>
                                 <td class="p-4 text-right">R$ 1,37</td>
+                                <td class="p-4 text-right">R$ 13,72</td>
                             </tr>
                             <tr class="table-row hover:bg-v4lightgray transition-colors">
-                                <td class="p-4">AD2 - Entre agora e jogue</td>
-                                <td class="p-4 text-gray-400 text-xs">[Windows] adv+...</td>
-                                <td class="p-4 text-right">R$ 87,35</td>
-                                <td class="p-4 text-right text-v4red font-bold">2</td>
-                                <td class="p-4 text-right">R$ 43,67</td>
+                                <td class="p-4 font-bold text-white">ADV4 - Inspirado em um clássico</td>
+                                <td class="p-4 text-gray-400 text-xs">Mix [Android] e [Windows]</td>
+                                <td class="p-4 text-right text-v4red font-bold">5</td>
+                                <td class="p-4 text-right">-</td>
+                                <td class="p-4 text-right">R$ 88,55</td>
                             </tr>
                         </tbody>
                     </table>
@@ -264,7 +343,7 @@
             </div>
         </section>
 
-        <!-- Slide 5: Criativos (Anexo) -->
+        <!-- Slide 6: Criativos (Anexo) -->
         <section class="slide flex-col justify-center px-6 md:px-20">
             <div class="w-full max-w-6xl mx-auto">
                 <div class="flex items-center mb-8">
@@ -295,7 +374,7 @@
             </div>
         </section>
 
-        <!-- Slide 6: O que foi feito -->
+        <!-- Slide 7: O que foi feito -->
         <section class="slide flex-col justify-center px-6 md:px-20">
             <div class="w-full max-w-4xl mx-auto">
                 <div class="flex items-center mb-10">
