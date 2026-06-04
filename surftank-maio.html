@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados de Maio | V4 Company</title>
+    <!-- Importação da fonte Montserrat conforme Brandbook V4 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Variáveis de Cores Brandbook V4 */
+        :root {
+            --v4-red: #e50914;
+            --v4-red-dark: #b20710;
+            --v4-red-darker: #80050b;
+            --v4-red-darkest: #400306;
+            
+            --v4-white: #ffffff;
+            --v4-light-1: #e5e5e5;
+            --v4-light-2: #cccccc;
+            --v4-light-3: #b3b3b3;
+            
+            --v4-dark-1: #333333;
+            --v4-dark-2: #262626;
+            --v4-dark-3: #1a1a1a;
+            --v4-black: #000000;
+            
+            --v4-green: #52cc5a;
+            --v4-yellow: #ffc02a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: var(--v4-dark-3);
+            color: var(--v4-light-1);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* Tipografia */
+        h1 {
+            font-weight: 800;
+            font-size: clamp(40px, 5vw, 72px);
+            color: var(--v4-white);
+            margin-bottom: 16px;
+            line-height: 1.1;
+        }
+
+        h1 span {
+            color: var(--v4-red);
+        }
+
+        h2 {
+            font-weight: 700;
+            font-size: clamp(28px, 3vw, 42px);
+            color: var(--v4-white);
+            margin: 0;
+        }
+
+        h3 {
+            font-weight: 400;
+            font-size: 22px;
+            color: var(--v4-light-2);
+            margin-bottom: 40px;
+        }
+
+        h4 {
+            font-weight: 300;
+            font-size: 18px;
+            color: var(--v4-light-3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Barra de Resumo Global */
+        .summary-banner {
+            background: linear-gradient(135deg, var(--v4-red-dark) 0%, var(--v4-red) 100%);
+            border-radius: 16px;
+            padding: 30px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 30px rgba(229, 9, 20, 0.15);
+        }
+
+        .summary-item {
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .summary-item h4 {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .summary-item .value {
+            font-size: 40px;
+            font-weight: 800;
+            color: var(--v4-white);
+            line-height: 1;
+        }
+
+        /* Grelha de Plataformas */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+
+        .platform-card {
+            background-color: var(--v4-dark-2);
+            border: 1px solid var(--v4-dark-1);
+            border-radius: 16px;
+            padding: 35px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .platform-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background-color: var(--v4-red);
+            border-radius: 16px 16px 0 0;
+        }
+
+        .platform-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--v4-dark-1);
+            padding-bottom: 15px;
+        }
+
+        .platform-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background-color: var(--v4-dark-1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: 800;
+            color: var(--v4-red);
+            font-size: 20px;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin-bottom: 35px;
+        }
+
+        .metric-box {
+            background-color: var(--v4-dark-3);
+            border-radius: 10px;
+            padding: 16px;
+            border-left: 3px solid var(--v4-dark-1);
+        }
+
+        .metric-box.highlight {
+            border-left-color: var(--v4-red);
+            background: linear-gradient(to right, rgba(229, 9, 20, 0.05), transparent);
+        }
+
+        .metric-box.success {
+            border-left-color: var(--v4-green);
+        }
+
+        .metric-box h4 {
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .metric-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--v4-white);
+        }
+
+        .metric-value.success-text {
+            color: var(--v4-green);
+        }
+
+        /* Tabelas de Campanhas */
+        .table-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--v4-white);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        .campaign-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            min-width: 700px;
+        }
+
+        .campaign-table th, .campaign-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--v4-dark-1);
+        }
+
+        .campaign-table th {
+            color: var(--v4-red);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .campaign-table tr:hover {
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+
+        .campaign-table td {
+            color: var(--v4-light-1);
+        }
+
+        .campaign-table .col-value {
+            font-weight: 600;
+        }
+
+        /* Rodapé */
+        footer {
+            margin-top: 60px;
+            text-align: center;
+            color: var(--v4-light-3);
+            font-size: 14px;
+            font-weight: 300;
+        }
+
+        @media (max-width: 768px) {
+            .summary-banner {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Cabeçalho da Apresentação -->
+        <header>
+            <h1>Resultados de <span>Maio</span></h1>
+            <h3>Análise de Performance - Meta Ads vs. Google Ads</h3>
+        </header>
+
+        <!-- Resumo Consolidado -->
+        <div class="summary-banner">
+            <div class="summary-item">
+                <h4>Investimento Total</h4>
+                <div class="value">R$ 6.243,52</div>
+            </div>
+            <div class="summary-item">
+                <h4>Total de Instalações</h4>
+                <div class="value">
+                    6.133
+                    <span style="font-size: 20px; color: var(--v4-green); vertical-align: baseline; margin-left: 8px;">(+72,3%)</span>
+                </div>
+                <div style="font-size: 13px; margin-top: 5px; color: rgba(255, 255, 255, 0.8); font-weight: 400;">Comparado a Abril (3.560)</div>
+            </div>
+            <div class="summary-item">
+                <h4>CPI Médio Geral</h4>
+                <div class="value">R$ 1,02</div>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            
+            <!-- CARTÃO META ADS -->
+            <div class="platform-card">
+                <div class="platform-header">
+                    <div class="platform-icon">M</div>
+                    <h2>Meta Ads</h2>
+                </div>
+                
+                <div class="metrics-grid">
+                    <div class="metric-box">
+                        <h4>Investimento</h4>
+                        <div class="metric-value">R$ 3.346,91</div>
+                    </div>
+                    
+                    <div class="metric-box highlight">
+                        <h4>Instalações</h4>
+                        <div class="metric-value">3.452</div>
+                    </div>
+                    
+                    <div class="metric-box success">
+                        <h4>CPI (Custo p/ Instalação)</h4>
+                        <div class="metric-value success-text">R$ 0,97</div>
+                    </div>
+                    
+                    <div class="metric-box">
+                        <h4>Impressões</h4>
+                        <div class="metric-value">393.580</div>
+                    </div>
+                    
+                    <div class="metric-box">
+                        <h4>Cliques no Link</h4>
+                        <div class="metric-value">6.137</div>
+                    </div>
+                </div>
+
+                <div class="table-title">Detalhamento de Campanhas (Meta)</div>
+                <div class="table-container">
+                    <table class="campaign-table">
+                        <thead>
+                            <tr>
+                                <th>Nome da Campanha</th>
+                                <th>Investimento (R$)</th>
+                                <th>Instalações</th>
+                                <th>Custo por Instalação (R$)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>[V4] Visita ao Perfil IG 19.05</td>
+                                <td>312,78</td>
+                                <td class="col-value">2.891</td>
+                                <td>0,10</td>
+                            </tr>
+                            <tr>
+                                <td>[V4] [Download Android] Conversão</td>
+                                <td>1.666,29</td>
+                                <td class="col-value">431</td>
+                                <td>3,86</td>
+                            </tr>
+                            <tr>
+                                <td>[V4] [RMKT] [Click Download]</td>
+                                <td>297,22</td>
+                                <td class="col-value">78</td>
+                                <td>3,81</td>
+                            </tr>
+                            <tr>
+                                <td>[V4] [Download] Conversão</td>
+                                <td>446,07</td>
+                                <td class="col-value">52</td>
+                                <td>8,57</td>
+                            </tr>
+                            <tr>
+                                <td>[V4] [Download Windows] Conversão</td>
+                                <td>624,55</td>
+                                <td class="col-value">0</td>
+                                <td>-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- CARTÃO GOOGLE ADS -->
+            <div class="platform-card">
+                <div class="platform-header">
+                    <div class="platform-icon">G</div>
+                    <h2>Google Ads</h2>
+                </div>
+                
+                <div class="metrics-grid">
+                    <div class="metric-box">
+                        <h4>Investimento</h4>
+                        <div class="metric-value">R$ 2.896,61</div>
+                    </div>
+                    
+                    <div class="metric-box highlight">
+                        <h4>Instalações</h4>
+                        <div class="metric-value">2.681</div>
+                    </div>
+                    
+                    <div class="metric-box success">
+                        <h4>CPI (Custo p/ Instalação)</h4>
+                        <div class="metric-value success-text">R$ 1,08</div>
+                    </div>
+                    
+                    <div class="metric-box">
+                        <h4>Impressões</h4>
+                        <div class="metric-value">410.032</div>
+                    </div>
+                    
+                    <div class="metric-box">
+                        <h4>Cliques</h4>
+                        <div class="metric-value">8.009</div>
+                    </div>
+                </div>
+
+                <div class="table-title">Detalhamento de Campanhas (Google)</div>
+                <div class="table-container">
+                    <table class="campaign-table">
+                        <thead>
+                            <tr>
+                                <th>Nome da Campanha</th>
+                                <th>Investimento (R$)</th>
+                                <th>Instalações</th>
+                                <th>Custo por Instalação (R$)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>[V4] Instalação</td>
+                                <td>1.949,15</td>
+                                <td class="col-value">2.458</td>
+                                <td>0,79</td>
+                            </tr>
+                            <tr>
+                                <td>[V4] [SEARCH] Brand Surftank</td>
+                                <td>460,64</td>
+                                <td class="col-value">223</td>
+                                <td>2,07</td>
+                            </tr>
+                            <tr>
+                                <td>[V4] [Youtube] Surftank</td>
+                                <td>486,81</td>
+                                <td class="col-value">5.313 vis.</td>
+                                <td>-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Rodapé -->
+        <footer>
+            <p>2026 © V4 Company. Dados extraídos dos relatórios de Meta e Google. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
