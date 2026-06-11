@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surftank - Relatório Consolidado de Lançamento | V4 Company</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        v4red: '#FF0000',
+                        v4redDark: '#800000',
+                        v4dark: '#0A0A0A',
+                        v4gray: '#141414',
+                        v4light: '#F5F5F5',
+                        v4card: '#1C1C1C',
+                        v4green: '#22C55E',
+                        v4yellow: '#FBBF24',
+                    },
+                    fontFamily: {
+                        bebas: ['"Bebas Neue"', 'sans-serif'],
+                        montserrat: ['Montserrat', 'sans-serif'],
+                        space: ['"Space Grotesk"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom slide animations */
+        .slide {
+            display: none;
+            opacity: 0;
+            transform: scale(0.98);
+            transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+        }
+        .slide.active {
+            display: flex;
+            opacity: 1;
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body class="bg-v4dark text-v4light font-montserrat h-screen w-screen overflow-hidden flex flex-col justify-between select-none">
+
+    <!-- Top Progress Bar & Header -->
+    <header class="w-full bg-v4dark/90 backdrop-blur-md border-b border-neutral-800 px-6 py-4 flex items-center justify-between z-50">
+        <div class="flex items-center gap-3">
+            <div class="bg-v4red text-white font-bebas text-2xl px-3 py-1 tracking-wider rounded">V4</div>
+            <div class="text-xs tracking-[0.2em] font-semibold text-neutral-400 uppercase hidden sm:block">
+                Company &times; Surftank
+            </div>
+        </div>
+        
+        <!-- Live Indicator and Slide Title inside header -->
+        <div class="text-right">
+            <span class="text-xs font-space text-v4red font-bold tracking-widest uppercase flex items-center justify-end gap-2">
+                <span class="h-2 w-2 rounded-full bg-v4red animate-ping"></span>
+                Relatório de Mídia
+            </span>
+            <span id="current-slide-badge" class="text-[10px] font-mono text-neutral-500 uppercase">Slide 1 de 6</span>
+        </div>
+    </header>
+
+    <!-- Slide Deck Progress Line Indicator -->
+    <div class="w-full bg-neutral-900 h-1">
+        <div id="progress-bar-indicator" class="bg-v4red h-full transition-all duration-300" style="width: 16.66%;"></div>
+    </div>
+
+    <!-- MAIN PRESENTATION AREA -->
+    <main class="flex-1 flex items-center justify-center p-4 md:p-8 relative">
+        <div class="w-full max-w-6xl aspect-video bg-[#0D0D0D] rounded-2xl border border-neutral-800 shadow-2xl relative overflow-hidden flex flex-col justify-between p-6 md:p-12">
+            
+            <!-- Absolute background glow based on V4 Brandbook -->
+            <div class="absolute -top-40 -right-40 w-96 h-96 bg-v4red/10 rounded-full blur-[100px] pointer-events-none"></div>
+            <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-v4red/5 rounded-full blur-[100px] pointer-events-none"></div>
+
+            <!-- SLIDE 1: CAPA -->
+            <div class="slide active flex-col justify-between h-full" data-title="Capa">
+                <div class="space-y-2">
+                    <p class="text-v4red font-space font-bold tracking-[0.4em] uppercase text-xs md:text-sm">PROJETO DE PERFORMANCE MULTI-CANAL</p>
+                    <div class="h-1 w-20 bg-v4red"></div>
+                </div>
+                
+                <div class="my-auto space-y-4">
+                    <h1 class="font-bebas text-5xl md:text-7xl lg:text-8xl tracking-tight leading-none">
+                        APRESENTAÇÃO DE RESULTADOS<br class="hidden md:block"><span class="text-v4red">LANÇAMENTO SURFTANK</span>
+                    </h1>
+                    <p class="text-neutral-400 text-lg md:text-2xl font-light max-w-2xl leading-relaxed">
+                        Relatório executivo unificando os dados reais das campanhas de Google Ads e as campanhas de Teaser e Conversão do Meta Ads.
+                    </p>
+                </div>
+
+                <div class="flex flex-wrap items-center justify-between gap-4 border-t border-neutral-800 pt-6">
+                    <div class="flex items-center gap-4">
+                        <span class="text-xs font-mono text-neutral-500 uppercase">Período de Análise:</span>
+                        <span class="text-xs font-semibold bg-neutral-900 px-3 py-1 rounded text-neutral-300">25 Mai &mdash; 11 Jun 2026</span>
+                    </div>
+                    <div class="text-[11px] text-neutral-500 font-mono flex items-center gap-1">
+                        <i data-lucide="award" class="h-3.5 w-3.5 text-v4red"></i> Foco: Geração de Atração & Instalações
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 2: CONSOLIDADO GERAL (SOMA DAS CAMPANHAS) -->
+            <div class="slide flex-col justify-between h-full" data-title="Consolidado de Mídia">
+                <div class="flex items-center justify-between border-b border-neutral-800 pb-4">
+                    <h2 class="font-bebas text-3xl md:text-5xl tracking-wide">RESULTADO <span class="text-v4red">CONSOLIDADO</span></h2>
+                    <span class="text-xs font-mono text-v4red uppercase">Soma Geral das Campanhas</span>
+                </div>
+
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 my-auto">
+                    <!-- KPI 1 -->
+                    <div class="bg-v4card p-4 md:p-6 rounded-lg border border-neutral-800 relative overflow-hidden">
+                        <p class="text-[10px] md:text-xs font-space font-bold uppercase text-neutral-400">Investimento Total</p>
+                        <h3 class="font-bebas text-3xl md:text-4xl lg:text-5xl text-white mt-2">R$ 3.097,82</h3>
+                        <div class="text-[10px] text-neutral-500 mt-1 flex flex-col">
+                            <span>Google Ads: R$ 1.704,96</span>
+                            <span>Meta Ads: R$ 1.392,86</span>
+                        </div>
+                    </div>
+
+                    <!-- KPI 2 -->
+                    <div class="bg-v4card p-4 md:p-6 rounded-lg border border-neutral-800 relative overflow-hidden">
+                        <p class="text-[10px] md:text-xs font-space font-bold uppercase text-neutral-400">Downloads Diretos</p>
+                        <h3 class="font-bebas text-3xl md:text-4xl lg:text-5xl text-v4red mt-2">3.021</h3>
+                        <div class="text-[10px] text-neutral-500 mt-1 flex flex-col">
+                            <span>Google: 2.787 Instalações</span>
+                            <span>Meta: 234 Conversões</span>
+                        </div>
+                    </div>
+
+                    <!-- KPI 3 -->
+                    <div class="bg-v4card p-4 md:p-6 rounded-lg border border-neutral-800 relative overflow-hidden">
+                        <p class="text-[10px] md:text-xs font-space font-bold uppercase text-neutral-400">CPI Médio (Blended)</p>
+                        <h3 class="font-bebas text-3xl md:text-4xl lg:text-5xl text-v4green mt-2">R$ 1,03</h3>
+                        <div class="text-[10px] text-neutral-500 mt-1 flex flex-col">
+                            <span>Excelente eficiência de custo</span>
+                            <span>Meta estipulada: R$ 1,00</span>
+                        </div>
+                    </div>
+
+                    <!-- KPI 4 -->
+                    <div class="bg-v4card p-4 md:p-6 rounded-lg border border-neutral-800 relative overflow-hidden">
+                        <p class="text-[10px] md:text-xs font-space font-bold uppercase text-neutral-400">Atração do Teaser</p>
+                        <h3 class="font-bebas text-3xl md:text-4xl lg:text-5xl text-white mt-2">45.968</h3>
+                        <div class="text-[10px] text-neutral-500 mt-1 flex flex-col">
+                            <span>Visualizações de Vídeo (2s+)</span>
+                            <span>Investimento Teaser: R$ 206,46</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-3 bg-v4red/5 rounded border border-v4red/20 text-xs text-neutral-300 flex items-center gap-2">
+                    <i data-lucide="trending-up" class="h-4 w-4 text-v4green shrink-0"></i>
+                    <span><strong>Visão do Gestor:</strong> O investimento unificado resultou em um custo unitário de aquisição (CPI Blended) de R$ 1,03, mantendo-se extremamente próximo do teto estratégico ideal de R$ 1,00 para fase de atração acelerada.</span>
+                </div>
+            </div>
+
+            <!-- SLIDE 3: GOOGLE ADS - DETALHAMENTO DO LANÇAMENTO -->
+            <div class="slide flex-col justify-between h-full" data-title="Google Ads Lançamento">
+                <div class="flex items-center justify-between border-b border-neutral-800 pb-4">
+                    <h2 class="font-bebas text-3xl md:text-5xl tracking-wide">GOOGLE ADS &mdash; <span class="text-v4red">CAMPANHA LANÇAMENTO</span></h2>
+                    <span class="text-xs font-mono text-neutral-500">Métricas da Campanha de App</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 my-auto">
+                    <div class="space-y-4">
+                        <p class="text-neutral-400 text-xs md:text-sm leading-relaxed font-semibold">
+                            A campanha <strong class="text-white font-bold">[V4] [App Install] Lançamento</strong> operou com eficiência máxima de funil, tornando-se o pilar central de downloads imediatos da aplicação Surftank durante o período de tração.
+                        </p>
+                        
+                        <!-- Mini metrics board -->
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-neutral-900 p-3 rounded border border-neutral-800">
+                                <span class="text-[10px] text-neutral-500 block uppercase font-space">Investimento</span>
+                                <span class="font-mono text-white text-base font-bold">R$ 1.704,96</span>
+                            </div>
+                            <div class="bg-neutral-900 p-3 rounded border border-neutral-800">
+                                <span class="text-[10px] text-neutral-500 block uppercase font-space">Instalações</span>
+                                <span class="font-mono text-v4red text-base font-bold">2.787</span>
+                            </div>
+                            <div class="bg-neutral-900 p-3 rounded border border-neutral-800">
+                                <span class="text-[10px] text-neutral-500 block uppercase font-space">Custo / Install (CPI)</span>
+                                <span class="font-mono text-v4green text-base font-bold">R$ 0,61</span>
+                            </div>
+                            <div class="bg-neutral-900 p-3 rounded border border-neutral-800">
+                                <span class="text-[10px] text-neutral-500 block uppercase font-space">Taxa de Conversão</span>
+                                <span class="font-mono text-white text-base font-bold">23,87%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Simplified Highlight Panel replacing Video Retention data -->
+                    <div class="bg-v4card p-5 rounded-lg border border-neutral-800 flex flex-col justify-between">
+                        <div class="space-y-3">
+                            <h4 class="font-space font-bold text-white text-sm flex items-center gap-1.5 uppercase">
+                                <i data-lucide="check-circle" class="h-4 w-4 text-v4green"></i> Destaques do Canal Google
+                            </h4>
+                            <p class="text-xs text-neutral-400 leading-relaxed">
+                                A campanha demonstrou um custo por download significativamente abaixo do mercado (**R$ 0,61**). O algoritmo do Google Ads priorizou inventários de alta conversão na Play Store e canais de pesquisa direta, resultando em mais de **2,7 mil novos usuários**.
+                            </p>
+                        </div>
+                        <div class="border-t border-neutral-800 pt-3 mt-4 text-[11px] text-neutral-500 font-mono">
+                            Total de cliques na campanha do Google: 7.596 (CTR: 2,57%)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-xs text-neutral-500 font-mono">
+                    Ativo Principal: Criativos Dinâmicos com foco em demonstração prática da aplicação.
+                </div>
+            </div>
+
+            <!-- SLIDE 4: META ADS - DETALHAMENTO DO LANÇAMENTO -->
+            <div class="slide flex-col justify-between h-full" data-title="Meta Ads Conversão">
+                <div class="flex items-center justify-between border-b border-neutral-800 pb-4">
+                    <h2 class="font-bebas text-3xl md:text-5xl tracking-wide">META ADS &mdash; <span class="text-v4red">CAMPANHA LANÇAMENTO</span></h2>
+                    <span class="text-xs font-mono text-neutral-500">Métricas de Conversão Direta</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 my-auto">
+                    <!-- Breakdown Cards -->
+                    <div class="space-y-4">
+                        <div class="bg-v4card p-4 rounded-lg border border-neutral-800">
+                            <span class="text-xs font-bold text-v4red block uppercase tracking-wide">01. Semelhante | Interesses</span>
+                            <p class="text-xs text-neutral-400 mt-1 mb-3">Públicos Lookalike de engajamento prévio e interesses relacionados.</p>
+                            <div class="grid grid-cols-3 gap-2 text-center">
+                                <div class="bg-[#111] p-2 rounded">
+                                    <span class="text-[9px] text-neutral-500 block">Investimento</span>
+                                    <span class="text-xs font-bold text-white">R$ 1.011,11</span>
+                                </div>
+                                <div class="bg-[#111] p-2 rounded">
+                                    <span class="text-[9px] text-neutral-500 block">Downloads</span>
+                                    <span class="text-xs font-bold text-white">143</span>
+                                </div>
+                                <div class="bg-[#111] p-2 rounded">
+                                    <span class="text-[9px] text-neutral-500 block">Custo / Resultados</span>
+                                    <span class="text-xs font-bold text-v4yellow">R$ 7,07</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-v4card p-4 rounded-lg border border-neutral-800">
+                            <span class="text-xs font-bold text-v4red block uppercase tracking-wide">02. Remarketing</span>
+                            <p class="text-xs text-neutral-400 mt-1 mb-3">Re-impacto qualificado em usuários que já conheciam a marca.</p>
+                            <div class="grid grid-cols-3 gap-2 text-center">
+                                <div class="bg-[#111] p-2 rounded">
+                                    <span class="text-[9px] text-neutral-500 block">Investimento</span>
+                                    <span class="text-xs font-bold text-white">R$ 175,29</span>
+                                </div>
+                                <div class="bg-[#111] p-2 rounded">
+                                    <span class="text-[9px] text-neutral-500 block">Downloads</span>
+                                    <span class="text-xs font-bold text-white">91</span>
+                                </div>
+                                <div class="bg-[#111] p-2 rounded">
+                                    <span class="text-[9px] text-neutral-500 block">Custo / Resultados</span>
+                                    <span class="text-xs font-bold text-v4green font-mono">R$ 1,92</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Meta conversion summary -->
+                    <div class="flex flex-col justify-between bg-[#111] p-5 rounded-lg border border-neutral-800">
+                        <div>
+                            <span class="text-[10px] text-neutral-500 uppercase tracking-widest block font-space">Consolidado Conversão Meta</span>
+                            <h3 class="font-bebas text-3xl text-white mt-1">234 <span class="text-v4red">Downloads</span></h3>
+                            <p class="text-xs text-neutral-400 mt-2 leading-relaxed">
+                                A campanha de conversão no Meta Ads gerou aquisição de público qualificado. O público de **remarketing** se provou extraordinariamente eficiente, capturando instalações por apenas **R$ 1,92**.
+                            </p>
+                        </div>
+                        <div class="border-t border-neutral-800 pt-3 mt-4 grid grid-cols-2 gap-2 text-[11px] font-mono">
+                            <div>
+                                <span class="text-neutral-500">Custo Total:</span>
+                                <span class="text-white block font-bold">R$ 1.186,40</span>
+                            </div>
+                            <div>
+                                <span class="text-neutral-500">Cliques (Todos):</span>
+                                <span class="text-white block font-bold">2.337</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-xs text-neutral-500 font-mono">
+                    Total de impressões acumuladas no Meta Lançamento: 151.402
+                </div>
+            </div>
+
+            <!-- SLIDE 5: META ADS - CAMPANHA TEASER DE LANÇAMENTO -->
+            <div class="slide flex-col justify-between h-full" data-title="Campanha Teaser Meta">
+                <div class="flex items-center justify-between border-b border-neutral-800 pb-4">
+                    <h2 class="font-bebas text-3xl md:text-5xl tracking-wide">META ADS &mdash; <span class="text-v4red">CAMPANHA TEASER</span></h2>
+                    <span class="text-xs font-mono text-neutral-500">Geração de Descoberta e Branding</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 my-auto">
+                    <div class="space-y-4">
+                        <p class="text-neutral-400 text-xs md:text-sm leading-relaxed">
+                            A campanha <strong class="text-white">Teaser Lançamento</strong> foi executada no Meta Ads focando em aquecimento de audiência e atração visual por meio de vídeos rápidos, preparando o público para a abertura oficial dos downloads do aplicativo.
+                        </p>
+                        
+                        <!-- Visual representation of key teaser numbers -->
+                        <div class="grid grid-cols-3 gap-2 text-center font-mono">
+                            <div class="bg-v4card p-3 rounded border border-neutral-800">
+                                <span class="text-[9px] text-neutral-500 block uppercase">Cliques (Todos)</span>
+                                <span class="text-sm font-bold text-white">61</span>
+                            </div>
+                            <div class="bg-v4card p-3 rounded border border-neutral-800">
+                                <span class="text-[9px] text-neutral-500 block uppercase">Alcance</span>
+                                <span class="text-sm font-bold text-white">62.055</span>
+                            </div>
+                            <div class="bg-v4card p-3 rounded border border-neutral-800">
+                                <span class="text-[9px] text-neutral-500 block uppercase">Frequência</span>
+                                <span class="text-sm font-bold text-white">1,27</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Highlighted Teaser Results Box -->
+                    <div class="bg-v4card p-5 rounded-lg border border-neutral-800 flex flex-col justify-between">
+                        <div class="space-y-2">
+                            <div class="flex items-center gap-1 text-v4red font-space text-xs font-bold uppercase tracking-wider">
+                                <span class="h-2 w-2 rounded-full bg-v4red"></span> Engajamento em Vídeo de 2 Segundos
+                            </div>
+                            <h3 class="font-bebas text-5xl text-white tracking-tight leading-none">45.968</h3>
+                            <p class="text-xs text-neutral-400 leading-relaxed">
+                                Visualizações de vídeo contínuas registadas a um custo por resultado incrivelmente baixo de **R$ 0,004** por visualização. 
+                            </p>
+                        </div>
+                        <div class="border-t border-neutral-800 pt-3 mt-4 flex items-center justify-between text-xs font-mono">
+                            <div>
+                                <span class="text-neutral-500 block font-space uppercase text-[9px]">Investimento Teaser:</span>
+                                <span class="font-bold text-white">R$ 206,46</span>
+                            </div>
+                            <div>
+                                <span class="text-neutral-500 block font-space uppercase text-[9px]">Impressões:</span>
+                                <span class="font-bold text-white">78.926</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-xs text-neutral-500 font-mono">
+                    Custo por mil impressões (CPM): R$ 2,61 | Conjunto de Anúncios: [adv+] Aberto
+                </div>
+            </div>
+
+            <!-- SLIDE 6: TABELA COMPARATIVA GERAL (FÁCIL EXPLICAÇÃO) -->
+            <div class="slide flex-col justify-between h-full" data-title="Tabela de Canais">
+                <div class="flex items-center justify-between border-b border-neutral-800 pb-4">
+                    <h2 class="font-bebas text-3xl md:text-5xl tracking-wide">TABELA DE CANAIS &mdash; <span class="text-v4red">VISÃO GERAL</span></h2>
+                    <span class="text-xs font-mono text-neutral-500">Métricas Consolidadas no Período</span>
+                </div>
+
+                <div class="my-auto overflow-hidden rounded-lg border border-neutral-800">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs md:text-sm">
+                            <thead class="bg-neutral-900 text-neutral-400 font-space uppercase text-[10px] tracking-wider">
+                                <tr>
+                                    <th class="p-4">Plataforma / Campanha</th>
+                                    <th class="p-4">Impressões</th>
+                                    <th class="p-4">Cliques (Todos)</th>
+                                    <th class="p-4">Instalações (Resultados)</th>
+                                    <th class="p-4">Investimento</th>
+                                    <th class="p-4 text-v4red">Custo / Resultado</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-neutral-800 bg-v4card/50 font-mono text-xs">
+                                <tr>
+                                    <td class="p-4 font-semibold font-montserrat">
+                                        Google Ads Lançamento (App)
+                                    </td>
+                                    <td class="p-4">295.022</td>
+                                    <td class="p-4">7.596</td>
+                                    <td class="p-4 font-bold text-white">2.787</td>
+                                    <td class="p-4">R$ 1.704,96</td>
+                                    <td class="p-4 text-v4green font-semibold">R$ 0,61</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-4 font-semibold font-montserrat">
+                                        Meta Ads Conversão (Lançamento)
+                                    </td>
+                                    <td class="p-4">151.402</td>
+                                    <td class="p-4">2.337</td>
+                                    <td class="p-4 font-bold text-white">234</td>
+                                    <td class="p-4">R$ 1.186,40</td>
+                                    <td class="p-4 text-v4yellow font-semibold font-mono">R$ 5,07</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-4 font-semibold font-montserrat">
+                                        Meta Ads Teaser (Pré-lançamento)
+                                    </td>
+                                    <td class="p-4">78.926</td>
+                                    <td class="p-4">61</td>
+                                    <td class="p-4 font-bold text-neutral-400">45.968 <span class="text-[9px] text-neutral-500 font-normal">(Views 2s)</span></td>
+                                    <td class="p-4">R$ 206,46</td>
+                                    <td class="p-4 text-neutral-400 font-mono">R$ 0,004</td>
+                                </tr>
+                                <tr class="bg-neutral-900 font-bold border-t border-neutral-700">
+                                    <td class="p-4 uppercase text-v4red font-space font-montserrat">Soma Total Geral</td>
+                                    <td class="p-4">525.350</td>
+                                    <td class="p-4">9.994</td>
+                                    <td class="p-4 text-white">3.021 <span class="text-[9px] text-neutral-400 font-normal">(Downloads diretos)</span></td>
+                                    <td class="p-4 text-v4red">R$ 3.097,82</td>
+                                    <td class="p-4 text-v4green">R$ 1,03 <span class="text-[9px] text-neutral-400 font-normal">(Custo Médio/Instal.)</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="text-xs text-neutral-500 font-space uppercase">
+                    V4 COMPANY | Relatório unificado de canais digitais
+                </div>
+            </div>
+
+            <!-- Bottom Controller / Slide Navigation Inside Deck -->
+            <footer class="flex items-center justify-between border-t border-neutral-800 pt-6 mt-4 font-montserrat">
+                <div class="flex items-center gap-2">
+                    <button id="btn-prev" class="p-2 bg-neutral-900 hover:bg-v4red text-white hover:text-white rounded transition-all cursor-pointer">
+                        <i data-lucide="chevron-left" class="h-5 w-5"></i>
+                    </button>
+                    <button id="btn-next" class="p-2 bg-neutral-900 hover:bg-v4red text-white hover:text-white rounded transition-all cursor-pointer">
+                        <i data-lucide="chevron-right" class="h-5 w-5"></i>
+                    </button>
+                </div>
+
+                <!-- Slide indicator dots -->
+                <div class="hidden md:flex items-center gap-2" id="slide-dots">
+                    <!-- Dots injected via JS -->
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <button id="btn-play" class="p-2 text-neutral-500 hover:text-v4red transition-colors cursor-pointer" title="Iniciar Autoplay">
+                        <i data-lucide="play" class="h-4 w-4"></i>
+                    </button>
+                    <button id="btn-fullscreen" class="p-2 text-neutral-500 hover:text-v4red transition-colors cursor-pointer" title="Ecrã Inteiro">
+                        <i data-lucide="maximize" class="h-4 w-4"></i>
+                    </button>
+                </div>
+            </footer>
+
+        </div>
+    </main>
+
+    <!-- Global Key Bindings Helper Toast -->
+    <div class="text-center py-2 text-[10px] text-neutral-600 bg-v4dark border-t border-neutral-900 font-mono">
+        Utilize as teclas <kbd class="px-1.5 py-0.5 bg-neutral-900 rounded border border-neutral-800">Seta Esquerda</kbd> e <kbd class="px-1.5 py-0.5 bg-neutral-900 rounded border border-neutral-800">Seta Direita</kbd> no teclado para alternar entre os slides.
+    </div>
+
+    <!-- MAIN APP JAVASCRIPT LOGIC -->
+    <script>
+        // DOM Elements
+        const slides = document.querySelectorAll('.slide');
+        const slideDotsContainer = document.getElementById('slide-dots');
+        const currentSlideBadge = document.getElementById('current-slide-badge');
+        const progressBarIndicator = document.getElementById('progress-bar-indicator');
+        const btnPrev = document.getElementById('btn-prev');
+        const btnNext = document.getElementById('btn-next');
+        const btnPlay = document.getElementById('btn-play');
+        const btnFullscreen = document.getElementById('btn-fullscreen');
+        
+        let currentSlideIndex = 0;
+        let autoplayInterval = null;
+        let isAutoplayRunning = false;
+
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Build Slide Dots Navigation
+        slides.forEach((slide, index) => {
+            const dot = document.createElement('button');
+            dot.className = `h-2 w-2 rounded-full transition-all duration-300 ${index === 0 ? 'bg-v4red w-6' : 'bg-neutral-800 hover:bg-neutral-600'}`;
+            dot.addEventListener('click', () => {
+                goToSlide(index);
+            });
+            slideDotsContainer.appendChild(dot);
+        });
+
+        // Navigation update function
+        function updatePresentation() {
+            slides.forEach((slide, index) => {
+                if (index === currentSlideIndex) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+
+            const dots = slideDotsContainer.querySelectorAll('button');
+            dots.forEach((dot, index) => {
+                if (index === currentSlideIndex) {
+                    dot.className = 'h-2 w-6 rounded-full bg-v4red transition-all duration-300';
+                } else {
+                    dot.className = 'h-2 w-2 rounded-full bg-neutral-800 hover:bg-neutral-600 transition-all duration-300';
+                }
+            });
+
+            const title = slides[currentSlideIndex].getAttribute('data-title') || 'Apresentação';
+            currentSlideBadge.textContent = `SLIDE ${currentSlideIndex + 1} de ${slides.length} : ${title.toUpperCase()}`;
+            
+            const percentage = ((currentSlideIndex + 1) / slides.length) * 100;
+            progressBarIndicator.style.width = `${percentage}%`;
+        }
+
+        function goToSlide(index) {
+            if (index >= 0 && index < slides.length) {
+                currentSlideIndex = index;
+                updatePresentation();
+            }
+        }
+
+        function nextSlide() {
+            if (currentSlideIndex < slides.length - 1) {
+                currentSlideIndex++;
+            } else {
+                currentSlideIndex = 0;
+            }
+            updatePresentation();
+        }
+
+        function prevSlide() {
+            if (currentSlideIndex > 0) {
+                currentSlideIndex--;
+            } else {
+                currentSlideIndex = slides.length - 1;
+            }
+            updatePresentation();
+        }
+
+        btnNext.addEventListener('click', () => {
+            nextSlide();
+            stopAutoplay();
+        });
+        btnPrev.addEventListener('click', () => {
+            prevSlide();
+            stopAutoplay();
+        });
+
+        function startAutoplay() {
+            isAutoplayRunning = true;
+            btnPlay.innerHTML = '<i data-lucide="pause" class="h-4 w-4"></i>';
+            btnPlay.classList.add('text-v4red');
+            lucide.createIcons();
+            
+            autoplayInterval = setInterval(() => {
+                nextSlide();
+            }, 6000);
+        }
+
+        function stopAutoplay() {
+            isAutoplayRunning = false;
+            btnPlay.innerHTML = '<i data-lucide="play" class="h-4 w-4"></i>';
+            btnPlay.classList.remove('text-v4red');
+            lucide.createIcons();
+            
+            if (autoplayInterval) {
+                clearInterval(autoplayInterval);
+            }
+        }
+
+        btnPlay.addEventListener('click', () => {
+            if (isAutoplayRunning) {
+                stopAutoplay();
+            } else {
+                startAutoplay();
+            }
+        });
+
+        btnFullscreen.addEventListener('click', () => {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.error(`Erro ao ativar tela cheia: ${err.message}`);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        });
+
+        window.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowRight' || event.key === ' ') {
+                nextSlide();
+                stopAutoplay();
+            } else if (event.key === 'ArrowLeft') {
+                prevSlide();
+                stopAutoplay();
+            }
+        });
+
+        // Touch Gestures support
+        let touchstartX = 0;
+        let touchendX = 0;
+        
+        document.addEventListener('touchstart', e => {
+            touchstartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', e => {
+            touchendX = e.changedTouches[0].screenX;
+            if (touchendX < touchstartX - 50) {
+                nextSlide();
+                stopAutoplay();
+            }
+            if (touchendX > touchstartX + 50) {
+                prevSlide();
+                stopAutoplay();
+            }
+        });
+
+    </script>
+</body>
+</html>
