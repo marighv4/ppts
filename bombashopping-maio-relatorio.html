@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="pt-PT" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bomba Shopping - Relatório de Performance</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        v4red: '#E30613',
+                        v4black: '#000000',
+                        v4dark: '#0B0B0C',
+                        v4card: '#121214',
+                        v4border: '#1F1F23',
+                        v4gray: '#9CA3AF'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        montserrat: ['Montserrat', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts: Montserrat e Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Alpine.js para controlo do Slide-Deck -->
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <style>
+        [x-cloak] { display: none !important; }
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #E30613;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body class="bg-v4black text-white font-sans h-screen flex flex-col justify-between overflow-hidden selection:bg-v4red selection:text-white"
+      x-data="{ 
+         currentSlide: 1, 
+         totalSlides: 7,
+         sidebarOpen: false,
+         selectedDeviceTab: 'mobile', // Para interatividade na análise do GA4
+         
+         nextSlide() {
+            if (this.currentSlide < this.totalSlides) this.currentSlide++;
+         },
+         prevSlide() {
+            if (this.currentSlide > 1) this.currentSlide--;
+         },
+         goToSlide(n) {
+            this.currentSlide = n;
+            this.sidebarOpen = false;
+         }
+      }"
+      @keydown.right.window="nextSlide()"
+      @keydown.left.window="prevSlide()"
+      @keydown.escape.window="sidebarOpen = false">
+
+    <!-- CABEÇALHO V4 -->
+    <header class="bg-v4dark border-b border-v4border py-4 px-6 md:px-12 flex justify-between items-center z-40">
+        <div class="flex items-center space-x-3">
+            <div class="flex items-center">
+                <span class="font-montserrat text-2xl font-black text-white tracking-tighter">V<span class="text-v4red">4</span></span>
+                <span class="text-xs uppercase tracking-[0.3em] font-light text-v4gray ml-2 pt-1 border-l border-v4border pl-2 hidden sm:inline">Company</span>
+            </div>
+            <div class="hidden md:flex items-center space-x-2 text-xs text-v4gray">
+                <span>/</span>
+                <span class="font-semibold tracking-wider text-white">DIAGNÓSTICO OPERACIONAL</span>
+            </div>
+        </div>
+        
+        <div class="flex items-center space-x-4">
+            <div class="text-right hidden sm:block">
+                <p class="text-xs font-semibold text-white">BOMBA SHOPPING</p>
+                <p class="text-[10px] text-v4gray uppercase tracking-widest font-mono">20/ABR A 20/MAI</p>
+            </div>
+            <button @click="sidebarOpen = !sidebarOpen" class="bg-v4card hover:bg-v4red border border-v4border hover:border-v4red text-white p-2 rounded transition-all duration-200">
+                <i data-lucide="menu" class="w-5 h-5"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- NAVEGAÇÃO LATERAL (SIDEBAR) -->
+    <div x-show="sidebarOpen" 
+         x-cloak
+         class="fixed inset-0 bg-black bg-opacity-90 z-50 transition-opacity duration-300 flex justify-end"
+         @click="sidebarOpen = false">
+        <div class="w-80 max-w-xs bg-v4dark h-full border-l border-v4border p-6 flex flex-col justify-between"
+             @click.stop>
+            <div>
+                <div class="flex justify-between items-center mb-8 border-b border-v4border pb-4">
+                    <h3 class="font-montserrat text-lg font-black tracking-tight text-white">SLIDES</h3>
+                    <button @click="sidebarOpen = false" class="text-v4gray hover:text-white transition">
+                        <i data-lucide="x" class="w-6 h-6"></i>
+                    </button>
+                </div>
+                <nav class="space-y-1">
+                    <button @click="goToSlide(1)" :class="currentSlide === 1 ? 'border-v4red text-white bg-v4card' : 'border-transparent text-v4gray hover:text-white hover:bg-v4card'" class="w-full text-left py-3 px-4 border-l-4 font-semibold text-sm flex items-center transition">
+                        <span class="w-6 font-mono text-xs text-v4red">01</span> Capa: Performance
+                    </button>
+                    <button @click="goToSlide(2)" :class="currentSlide === 2 ? 'border-v4red text-white bg-v4card' : 'border-transparent text-v4gray hover:text-white hover:bg-v4card'" class="w-full text-left py-3 px-4 border-l-4 font-semibold text-sm flex items-center transition">
+                        <span class="w-6 font-mono text-xs text-v4red">02</span> Visão Geral Comercial
+                    </button>
+                    <button @click="goToSlide(3)" :class="currentSlide === 3 ? 'border-v4red text-white bg-v4card' : 'border-transparent text-v4gray hover:text-white hover:bg-v4card'" class="w-full text-left py-3 px-4 border-l-4 font-semibold text-sm flex items-center transition">
+                        <span class="w-6 font-mono text-xs text-v4red">03</span> Perda Crítica: Connect Rate
+                    </button>
+                    <button @click="goToSlide(4)" :class="currentSlide === 4 ? 'border-v4red text-white bg-v4card' : 'border-transparent text-v4gray hover:text-white hover:bg-v4card'" class="w-full text-left py-3 px-4 border-l-4 font-semibold text-sm flex items-center transition">
+                        <span class="w-6 font-mono text-xs text-v4red">04</span> Google Ads: Atração & Conversão
+                    </button>
+                    <button @click="goToSlide(5)" :class="currentSlide === 5 ? 'border-v4red text-white bg-v4card' : 'border-transparent text-v4gray hover:text-white hover:bg-v4card'" class="w-full text-left py-3 px-4 border-l-4 font-semibold text-sm flex items-center transition">
+                        <span class="w-6 font-mono text-xs text-v4red">05</span> Meta Ads: Geração de Contactos
+                    </button>
+                    <button @click="goToSlide(6)" :class="currentSlide === 6 ? 'border-v4red text-white bg-v4card' : 'border-transparent text-v4gray hover:text-white hover:bg-v4card'" class="w-full text-left py-3 px-4 border-l-4 font-semibold text-sm flex items-center transition">
+                        <span class="w-6 font-mono text-xs text-v4red">06</span> Funil GA4 e Atrito de Dispositivos
+                    </button>
+                    <button @click="goToSlide(7)" :class="currentSlide === 7 ? 'border-v4red text-white bg-v4card' : 'border-transparent text-v4gray hover:text-white hover:bg-v4card'" class="w-full text-left py-3 px-4 border-l-4 font-semibold text-sm flex items-center transition">
+                        <span class="w-6 font-mono text-xs text-v4red">07</span> Sinergia Multicanal (Playbook)
+                    </button>
+                </nav>
+            </div>
+            <div class="border-t border-v4border pt-4 text-center">
+                <p class="text-xs text-v4gray">V4 Company © 2026</p>
+                <p class="text-[10px] text-v4red tracking-wider mt-1 font-semibold uppercase">Dados Extraídos da Operação</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENTOR PRINCIPAL DOS SLIDES -->
+    <main class="flex-grow flex items-center justify-center p-4 md:p-8 overflow-y-auto relative">
+
+        <!-- SLIDE 1: CAPA -->
+        <div x-show="currentSlide === 1" x-cloak class="w-full max-w-5xl mx-auto space-y-6 py-6">
+            <div class="space-y-4">
+                <div class="inline-flex items-center space-x-2 bg-v4red bg-opacity-10 text-v4red px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider border border-v4red border-opacity-20">
+                    <span class="w-2 h-2 bg-v4red rounded-full"></span>
+                    <span>Análise Detalhada de Dados Comerciais</span>
+                </div>
+                <h1 class="font-montserrat text-5xl sm:text-7xl font-black text-white tracking-tight leading-none uppercase">
+                    MÉTRICAS E <br><span class="text-v4red">DIAGNÓSTICO</span> DE TRÁFEGO
+                </h1>
+                <p class="text-v4gray text-base sm:text-lg max-w-2xl font-light">
+                    Auditoria real da faturação, comportamento do público-alvo e funil de conversão da <strong class="text-white font-medium">Bomba Shopping</strong> entre 20 de Abril e 20 de Maio de 2026.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-v4border">
+                <div class="bg-v4card border border-v4border p-4 rounded">
+                    <span class="text-[10px] text-v4gray uppercase block tracking-wider font-mono">Investimento em Média</span>
+                    <span class="text-lg font-bold text-white mt-1 block">R$ 45.541,40</span>
+                </div>
+                <div class="bg-v4card border border-v4border p-4 rounded">
+                    <span class="text-[10px] text-v4gray uppercase block tracking-wider font-mono">Faturação Atribuída</span>
+                    <span class="text-lg font-bold text-v4red mt-1 block">R$ 56.790,63</span>
+                </div>
+                <div class="bg-v4card border border-v4border p-4 rounded">
+                    <span class="text-[10px] text-v4gray uppercase block tracking-wider font-mono">Foco da Auditoria</span>
+                    <span class="text-lg font-bold text-white mt-1 block">Otimização de Funil & UX</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 2: VISÃO GERAL COMERCIAL -->
+        <div x-show="currentSlide === 2" x-cloak class="w-full max-w-5xl mx-auto space-y-6">
+            <div class="border-b border-v4border pb-4">
+                <span class="text-xs font-mono text-v4red tracking-wider uppercase font-semibold">02 / DESEMPENHO MACRO</span>
+                <h2 class="font-montserrat text-2xl md:text-3xl font-black text-white uppercase tracking-tight">RESULTADO COMERCIAL CONSOLIDADO</h2>
+            </div>
+
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-v4card border border-v4border p-5 rounded">
+                    <span class="text-[10px] text-v4gray uppercase tracking-wider font-mono block">Investimento Mídia</span>
+                    <span class="text-xl sm:text-2xl font-black font-montserrat text-white block mt-1">R$ 45.541,40</span>
+                    <span class="text-[10px] text-v4gray block mt-1">Google + Meta Ads</span>
+                </div>
+                
+                <div class="bg-v4card border border-v4border p-5 rounded">
+                    <span class="text-[10px] text-v4gray uppercase tracking-wider font-mono block">Faturação Global</span>
+                    <span class="text-xl sm:text-2xl font-black font-montserrat text-v4red block mt-1">R$ 56.790,63</span>
+                    <span class="text-[10px] text-v4gray block mt-1">E-com + Whatsapp</span>
+                </div>
+
+                <div class="bg-v4card border border-v4border p-5 rounded">
+                    <span class="text-[10px] text-v4gray uppercase tracking-wider font-mono block">Vendas Concluídas</span>
+                    <span class="text-xl sm:text-2xl font-black font-montserrat text-white block mt-1">21</span>
+                    <span class="text-[10px] text-v4gray block mt-1">15 E-com / 6 Whatsapp</span>
+                </div>
+
+                <div class="bg-v4card border border-v4border p-5 rounded">
+                    <span class="text-[10px] text-v4gray uppercase tracking-wider font-mono block">ROAS Global</span>
+                    <span class="text-xl sm:text-2xl font-black font-montserrat text-white block mt-1">1,25x</span>
+                    <span class="text-[10px] text-v4gray block mt-1">Retorno Geral Comercial</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                <div class="bg-v4card border border-v4border p-5 rounded flex justify-between items-center">
+                    <div>
+                        <span class="text-xs text-v4gray uppercase tracking-wider font-mono block">Ticket Médio E-com</span>
+                        <span class="text-2xl font-bold font-montserrat text-white mt-1 block">R$ 2.449,24</span>
+                    </div>
+                    <div class="text-right border-l border-v4border pl-6">
+                        <span class="text-[10px] text-v4gray uppercase tracking-wider block">Faturação E-com</span>
+                        <span class="text-sm font-bold text-white font-mono">R$ 36.738,63</span>
+                    </div>
+                </div>
+
+                <div class="bg-v4card border border-v4border p-5 rounded flex justify-between items-center">
+                    <div>
+                        <span class="text-xs text-v4gray uppercase tracking-wider font-mono block">Ticket Médio Whatsapp</span>
+                        <span class="text-2xl font-bold font-montserrat text-v4red mt-1 block">R$ 3.342,00</span>
+                    </div>
+                    <div class="text-right border-l border-v4border pl-6">
+                        <span class="text-[10px] text-v4gray uppercase tracking-wider block">Faturação Whats</span>
+                        <span class="text-sm font-bold text-v4red font-mono">R$ 20.052,00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 3: O GARGALO TÉCNICO (CONNECT RATE) -->
+        <div x-show="currentSlide === 3" x-cloak class="w-full max-w-5xl mx-auto space-y-6">
+            <div class="border-b border-v4border pb-4">
+                <span class="text-xs font-mono text-v4red tracking-wider uppercase font-semibold">03 / VELOCIDADE & ATRAÇÃO</span>
+                <h2 class="font-montserrat text-2xl md:text-3xl font-black text-white uppercase tracking-tight">O GARGALO CRÍTICO DO CONNECT RATE</h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                <div class="lg:col-span-5 space-y-4">
+                    <div class="bg-v4red bg-opacity-10 border border-v4red border-opacity-35 p-6 rounded-lg text-center">
+                        <span class="text-xs uppercase tracking-widest font-mono text-v4red block font-bold">Connect Rate Geral</span>
+                        <div class="font-montserrat text-6xl font-black text-white tracking-tighter mt-2">43,29%</div>
+                        <p class="text-xs text-v4gray mt-3">Relação direta de Cliques pagos que viraram Sessões reais.</p>
+                    </div>
+
+                    <div class="bg-v4card border border-v4border p-4 rounded text-xs text-v4gray space-y-2">
+                        <div class="flex justify-between border-b border-v4border pb-1">
+                            <span>Cliques em Anúncios:</span>
+                            <span class="font-mono text-white font-bold">45.690</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Sessões Registadas:</span>
+                            <span class="font-mono text-white font-bold">19.781</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 space-y-4">
+                    <h3 class="font-montserrat text-lg font-bold text-white uppercase">ANÁLISE FINANCEIRA DA PERDA DE TRÁFEGO</h3>
+                    <p class="text-sm text-v4gray leading-relaxed">
+                        Ao custo médio de <strong class="text-white">R$ 1,00 por clique (CPC)</strong>, a perda técnica de carregamento do e-commerce gerou o desperdício direto de orçamento ilustrado abaixo:
+                    </p>
+
+                    <div class="relative bg-black p-4 rounded border border-v4border">
+                        <div class="flex justify-between items-center text-xs mb-2">
+                            <span class="text-v4gray font-bold">CONECTADOS (Sessões no Site)</span>
+                            <span class="font-mono text-green-500 font-bold">19.781 (43,29%)</span>
+                        </div>
+                        <div class="w-full bg-v4dark h-4 rounded overflow-hidden mb-4">
+                            <div class="bg-green-500 h-full" style="width: 43.29%"></div>
+                        </div>
+
+                        <div class="flex justify-between items-center text-xs mb-2">
+                            <span class="text-v4gray font-bold">DESISTÊNCIAS (Carregamento Lento)</span>
+                            <span class="font-mono text-v4red font-bold">25.909 (56,71%)</span>
+                        </div>
+                        <div class="w-full bg-v4dark h-4 rounded overflow-hidden">
+                            <div class="bg-v4red h-full" style="width: 56.71%"></div>
+                        </div>
+                    </div>
+
+                    <div class="bg-v4red bg-opacity-5 p-4 rounded border border-v4red border-opacity-20 text-xs">
+                        <strong class="text-white uppercase block mb-1">Impacto Financeiro:</strong>
+                        R$ 25.909,00 do investimento de tráfego pago não geraram sequer uma visita útil ao site da Bomba Shopping por atrito ou lentidão na infraestrutura de alojamento/plataforma.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 4: GOOGLE ADS EM DETALHE -->
+        <div x-show="currentSlide === 4" x-cloak class="w-full max-w-5xl mx-auto space-y-4">
+            <div class="border-b border-v4border pb-2 flex flex-col md:flex-row md:items-center justify-between gap-2">
+                <div>
+                    <span class="text-xs font-mono text-v4red tracking-wider uppercase font-semibold">04 / CANAIS DE AQUISIÇÃO</span>
+                    <h2 class="font-montserrat text-2xl md:text-3xl font-black text-white uppercase tracking-tight">GOOGLE ADS: ATRAÇÃO & CONVERSÃO</h2>
+                </div>
+                <div class="bg-yellow-500 bg-opacity-10 border border-yellow-500 border-opacity-30 px-3 py-1 rounded text-[10px] text-yellow-500 font-bold font-mono uppercase">
+                    Motor de Aquisição Direta
+                </div>
+            </div>
+
+            <!-- Métricas Macro de Google Ads -->
+            <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 text-center">
+                <div class="bg-v4card border border-v4border p-4 rounded">
+                    <span class="text-[10px] text-v4gray uppercase block font-mono">Investimento do Período</span>
+                    <span class="text-xl font-bold font-montserrat text-white block mt-1">R$ 44.074,05</span>
+                </div>
+                <div class="bg-v4card border border-v4border p-4 rounded">
+                    <span class="text-[10px] text-v4gray uppercase block font-mono">Volume de Cliques</span>
+                    <span class="text-xl font-bold font-montserrat text-white block mt-1">44.666</span>
+                </div>
+                <div class="bg-v4card border border-v4border p-4 rounded border-l-2 border-l-v4red">
+                    <span class="text-[10px] text-v4red uppercase block font-mono font-bold">Vendas E-com Diretas</span>
+                    <span class="text-xl font-bold font-montserrat text-v4red block mt-1">15 Vendas</span>
+                    <span class="text-[10px] text-v4gray mt-0.5 block font-mono">R$ 36.738,63</span>
+                </div>
+                <div class="bg-v4card border border-v4border p-4 rounded">
+                    <span class="text-[10px] text-v4gray uppercase block font-mono">Total Click_Wpp</span>
+                    <span class="text-xl font-bold font-montserrat text-white block mt-1">315 Contactos</span>
+                </div>
+            </div>
+
+            <!-- Detalhamento de Conversões Google -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-v4card border border-v4border p-5 rounded space-y-3">
+                    <h3 class="font-montserrat text-xs font-bold text-white uppercase tracking-wider border-b border-v4border pb-2">Resultados por Tipo de Campanha</h3>
+                    <div class="space-y-3 font-mono text-xs">
+                        <div class="space-y-1">
+                            <div class="flex justify-between items-center">
+                                <span class="text-white font-sans font-semibold">Rede de Pesquisa (Search)</span>
+                                <span class="text-v4red font-bold">152 Click_Wpp</span>
+                            </div>
+                            <div class="text-[10px] text-v4gray">Sendo 14 Cliques de Institucional + 138 Cliques de Campanhas de Serviço/Pesquisa.</div>
+                        </div>
+                        <div class="border-t border-v4border my-2"></div>
+                        <div class="space-y-1">
+                            <div class="flex justify-between items-center">
+                                <span class="text-white font-sans font-semibold">Performance Max (PMax)</span>
+                                <span class="text-white font-bold">32,3 Click_Wpp</span>
+                            </div>
+                            <div class="text-[10px] text-v4gray">Apresentado no relatório consolidado do GA4 como indexador 323.</div>
+                        </div>
+                        <div class="border-t border-v4border my-2"></div>
+                        <div class="space-y-1">
+                            <div class="flex justify-between items-center">
+                                <span class="text-white font-sans font-semibold">Shopping Padrão</span>
+                                <span class="text-white font-bold">10,1 Click_Wpp</span>
+                            </div>
+                            <div class="text-[10px] text-v4gray">Apresentado no relatório consolidado do GA4 como indexador 101.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-v4card border border-v4border p-5 rounded flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-montserrat text-xs font-bold text-white uppercase tracking-wider border-b border-v4border pb-2 mb-4">Geração de Leads Qualificados</h3>
+                        <div class="bg-black p-4 rounded space-y-3">
+                            <div class="flex justify-between items-center border-b border-v4border pb-2">
+                                <span class="text-xs text-v4gray font-sans">Leads LP (Pressurizadores & Bomba Incêndio)</span>
+                                <span class="text-lg font-bold text-white font-mono">34</span>
+                            </div>
+                            <p class="text-[11px] text-v4gray leading-relaxed font-sans">
+                                Leads oriundos da Landing Page que demandam atendimento consultivo para orçamentação B2B e projetos de engenharia civil/industrial.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-v4red bg-opacity-5 border border-v4red border-opacity-20 p-3 rounded text-[11px] text-v4red">
+                        <strong>Foco Técnico:</strong> O canal de Google Ads foi responsável pela totalidade da faturação de e-commerce da operação (R$ 36.738,63).
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 5: META ADS EM DETALHE -->
+        <div x-show="currentSlide === 5" x-cloak class="w-full max-w-5xl mx-auto space-y-6">
+            <div class="border-b border-v4border pb-4 flex flex-col md:flex-row md:items-center justify-between gap-2">
+                <div>
+                    <span class="text-xs font-mono text-v4red tracking-wider uppercase font-semibold">05 / CANAIS DE ENGAJAMENTO</span>
+                    <h2 class="font-montserrat text-2xl md:text-3xl font-black text-white uppercase tracking-tight">META ADS: GERADO NO WHATSAPP</h2>
+                </div>
+                <div class="bg-blue-600 bg-opacity-10 border border-blue-600 border-opacity-30 px-3 py-1 rounded text-[10px] text-blue-500 font-bold font-mono uppercase">
+                    Estratégia de Captação Direta & Cerco
+                </div>
+            </div>
+
+            <!-- Métricas Macro do Meta Ads -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                <div class="bg-v4card border border-v4border p-4 rounded">
+                    <span class="text-[10px] text-v4gray uppercase block font-mono">Investimento Consolidado</span>
+                    <span class="text-2xl font-bold font-montserrat text-white block mt-1">R$ 1.467,19</span>
+                </div>
+                <div class="bg-v4card border border-v4border p-4 rounded border-l-2 border-l-v4red">
+                    <span class="text-[10px] text-v4red uppercase block font-mono font-bold">Contactos Whatsapp Direct</span>
+                    <span class="text-2xl font-bold font-montserrat text-v4red block mt-1">24 Contactos</span>
+                </div>
+                <div class="bg-v4card border border-v4border p-4 rounded">
+                    <span class="text-[10px] text-v4gray uppercase block font-mono">Custo por Contacto</span>
+                    <span class="text-2xl font-bold font-montserrat text-white block mt-1 font-mono">R$ 61,13</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch">
+                <!-- Visão estratégica do canal Meta Ads -->
+                <div class="md:col-span-7 bg-v4card border border-v4border p-5 rounded space-y-4 flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-montserrat text-xs font-bold text-white uppercase tracking-wider mb-2">Visão Estratégica do Canal</h3>
+                        <p class="text-xs text-v4gray leading-relaxed font-sans">
+                            No funil comercial da Bomba Shopping, o Meta Ads funciona de forma consolidada para **recuperar o público de alta intenção** (remarketing do e-commerce) e para gerar um fluxo estável de **conversações diretas de WhatsApp** direcionadas aos consultores comerciais.
+                        </p>
+                    </div>
+                    
+                    <div class="bg-black p-4 rounded space-y-2 font-mono text-xs">
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-v4red block font-sans">Sinergia e Blindagem de Funil:</span>
+                        <p class="text-[11px] text-v4gray font-sans">
+                            Sem a pulverização de relatórios por campanha individual, analisamos o Meta Ads pelo seu papel de cerco. O canal reimpactou utilizadores qualificados, gerando um volume de <strong>24 contactos diretos no WhatsApp</strong>.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Estatísticas de Atrito de Remarketing -->
+                <div class="md:col-span-5 bg-v4card border border-v4border p-5 rounded flex flex-col justify-between space-y-4">
+                    <div>
+                        <h3 class="font-montserrat text-xs font-bold text-white uppercase tracking-wider mb-2">Métricas de Engajamento</h3>
+                        <p class="text-xs text-v4gray">
+                            O tráfego de remarketing do Meta garantiu as seguintes taxas no período:
+                        </p>
+                    </div>
+                    
+                    <div class="space-y-2 text-xs font-mono">
+                        <div class="flex justify-between bg-black p-2 rounded">
+                            <span class="text-v4gray">Cliques no Link:</span>
+                            <span class="text-white font-bold">1.025 cliques</span>
+                        </div>
+                        <div class="flex justify-between bg-black p-2 rounded">
+                            <span class="text-v4gray">Conversão CTR Média:</span>
+                            <span class="text-white font-bold">2,15%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-v4red bg-opacity-5 border border-v4red border-opacity-20 p-3 rounded text-[11px] text-v4red font-sans">
+                        <strong>Diretriz:</strong> Sem micro-especificação de campanhas, a avaliação do Meta Ads deve ser medida pela constância e volume de conversas criadas no WhatsApp.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 6: FUNIL GA4 E DISPOSITIVOS -->
+        <div x-show="currentSlide === 6" x-cloak class="w-full max-w-5xl mx-auto space-y-6">
+            <div class="border-b border-v4border pb-4 flex flex-col md:flex-row md:items-center justify-between gap-2">
+                <div>
+                    <span class="text-xs font-mono text-v4red tracking-wider uppercase font-semibold">06 / COMPORTAMENTO GA4</span>
+                    <h2 class="font-montserrat text-2xl md:text-3xl font-black text-white uppercase tracking-tight">O ATRITO DA JORNADA POR DISPOSITIVO</h2>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- Funil Geral GA4 -->
+                <div class="lg:col-span-6 bg-v4card border border-v4border p-5 rounded space-y-4">
+                    <h3 class="font-montserrat text-sm font-bold text-white uppercase tracking-wider">Jornada de Compra Consolidada</h3>
+                    
+                    <div class="space-y-3 font-mono text-xs">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-v4gray">1. Início de Sessão</span>
+                                <span class="text-white font-bold">19.360 (100%)</span>
+                            </div>
+                            <div class="w-full bg-v4dark h-2 rounded"><div class="bg-v4red h-full w-full"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-v4gray">2. Conferir Produto</span>
+                                <span class="text-white font-bold">8.731 (45,1%)</span>
+                            </div>
+                            <div class="w-full bg-v4dark h-2 rounded"><div class="bg-v4gray h-full" style="width: 45.1%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-v4gray">3. Adicionar ao Carrinho</span>
+                                <span class="text-white font-bold">275 (1,42%)</span>
+                            </div>
+                            <div class="w-full bg-v4dark h-2 rounded"><div class="bg-v4gray h-full" style="width: 1.42%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-v4gray">4. Iniciar Pagamento</span>
+                                <span class="text-white font-bold">122 (0,63%)</span>
+                            </div>
+                            <div class="w-full bg-v4dark h-2 rounded"><div class="bg-v4gray h-full" style="width: 0.63%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-v4red font-bold">5. Compras Efetuadas</span>
+                                <span class="text-v4red font-bold">13 (0,07%)</span>
+                            </div>
+                            <div class="w-full bg-v4dark h-2 rounded"><div class="bg-v4red h-full" style="width: 0.07%"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detalhamento Telemóvel vs Desktop -->
+                <div class="lg:col-span-6 bg-v4card border border-v4border p-5 rounded flex flex-col justify-between">
+                    <div>
+                        <div class="flex space-x-2 border-b border-v4border pb-3 mb-4">
+                            <button @click="selectedDeviceTab = 'mobile'" :class="selectedDeviceTab === 'mobile' ? 'bg-v4red text-white' : 'bg-v4dark text-v4gray'" class="px-3 py-1 rounded text-xs font-bold font-mono transition">
+                                MÓVEL (71.7%)
+                            </button>
+                            <button @click="selectedDeviceTab = 'desktop'" :class="selectedDeviceTab === 'desktop' ? 'bg-v4red text-white' : 'bg-v4dark text-v4gray'" class="px-3 py-1 rounded text-xs font-bold font-mono transition">
+                                DESKTOP (27.7%)
+                            </button>
+                        </div>
+
+                        <!-- Mobile Content (Telemóvel) -->
+                        <div x-show="selectedDeviceTab === 'mobile'" class="space-y-4 text-xs">
+                            <div class="flex justify-between">
+                                <span class="text-v4gray">Início de Sessões:</span>
+                                <span class="font-bold text-white font-mono">13.880 utilizadores</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-v4gray">Visualizaram Produto:</span>
+                                <span class="font-bold text-white font-mono">5.617 utilizadores (40.4%)</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-v4gray">Adicionaram ao Carrinho:</span>
+                                <span class="font-bold text-white font-mono">122 utilizadores (0.87%)</span>
+                            </div>
+                            <div class="flex justify-between border-t border-v4border pt-2 text-v4red font-bold">
+                                <span>Compras no Telemóvel:</span>
+                                <span class="font-mono">Apenas 2 compras (0.01%)</span>
+                            </div>
+                        </div>
+
+                        <!-- Desktop Content -->
+                        <div x-show="selectedDeviceTab === 'desktop'" class="space-y-4 text-xs" x-cloak>
+                            <div class="flex justify-between">
+                                <span class="text-v4gray">Início de Sessões:</span>
+                                <span class="font-bold text-white font-mono">5.366 utilizadores</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-v4gray">Visualizaram Produto:</span>
+                                <span class="font-bold text-white font-mono">3.056 utilizadores (56.9%)</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-v4gray">Adicionaram ao Carrinho:</span>
+                                <span class="font-bold text-white font-mono">151 utilizadores (2.81%)</span>
+                            </div>
+                            <div class="flex justify-between border-t border-v4border pt-2 text-green-500 font-bold">
+                                <span>Compras no Desktop:</span>
+                                <span class="font-mono">11 compras (0.21%)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-v4dark p-3 rounded text-[11px] text-v4gray mt-4 border border-v4border">
+                        <strong>Insight Chave:</strong> 85% das transações diretas acontecem em Desktop (11 de 13 compras no GA4), enquanto 71% do tráfego navega via telemóvel. O atrito de UX no telemóvel está a filtrar severamente os potenciais compradores.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 7: SINERGIA DOS CANAIS -->
+        <div x-show="currentSlide === 7" x-cloak class="w-full max-w-5xl mx-auto space-y-6">
+            <div class="border-b border-v4border pb-4">
+                <span class="text-xs font-mono text-v4red tracking-wider uppercase font-semibold">07 / PLAYBOOK OPERACIONAL</span>
+                <h2 class="font-montserrat text-2xl md:text-3xl font-black text-white uppercase tracking-tight">SINERGIA MULTICANAL INTEGRADORA</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Canal Google -->
+                <div class="bg-v4card border border-v4border p-5 rounded space-y-3">
+                    <span class="bg-yellow-500 text-black font-mono font-bold text-[9px] px-2 py-0.5 rounded tracking-widest uppercase">Passo 1: Atração</span>
+                    <h3 class="font-montserrat text-base font-bold text-white uppercase">Google Search & PMax</h3>
+                    <p class="text-xs text-v4gray leading-relaxed">
+                        Captação da audiência de alta intenção e procura ativa (indivíduos a pesquisar termos específicos de bombas de água no motor de busca).
+                    </p>
+                </div>
+
+                <!-- Canal Meta -->
+                <div class="bg-v4card border border-v4border p-5 rounded space-y-3">
+                    <span class="bg-blue-600 text-white font-mono font-bold text-[9px] px-2 py-0.5 rounded tracking-widest uppercase">Passo 2: Cerco</span>
+                    <h3 class="font-montserrat text-base font-bold text-white uppercase">Meta Ads Remarketing</h3>
+                    <p class="text-xs text-v4gray leading-relaxed font-sans">
+                        Reimpacto dinâmico de anúncios de catálogo e listas de remarketing para resgatar os utilizadores que abandonaram o site sem efetuar a compra.
+                    </p>
+                </div>
+
+                <!-- Canal WhatsApp / Comercial -->
+                <div class="bg-v4card border border-v4border p-5 rounded space-y-3">
+                    <span class="bg-green-500 text-black font-mono font-bold text-[9px] px-2 py-0.5 rounded tracking-widest uppercase">Passo 3: Fecho</span>
+                    <h3 class="font-montserrat text-base font-bold text-white uppercase">Venda High-Ticket</h3>
+                    <p class="text-xs text-v4gray leading-relaxed font-sans">
+                        Equipa comercial assistida a capturar leads diretos. Prova disso é o Ticket Médio de <strong>R$ 3.342,00</strong> gerado em conversas de chat.
+                    </p>
+                </div>
+            </div>
+
+            <div class="bg-v4dark p-5 rounded border border-v4border flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="space-y-1">
+                    <span class="text-xs text-v4red font-bold uppercase tracking-wider font-mono">Conclusão de Canais</span>
+                    <p class="text-xs text-v4gray font-sans">A estrutura comercial funciona de forma integrada. Não há desperdício de média, mas sim uma barreira de atrito técnico a ser superada no e-commerce.</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- RODAPÉ COM NAVEGAÇÃO DOS SLIDES -->
+    <footer class="bg-v4dark border-t border-v4border py-4 px-6 md:px-12 flex justify-between items-center z-40">
+        <!-- Indicador de Progresso -->
+        <div class="flex items-center space-x-1.5">
+            <template x-for="i in totalSlides">
+                <button @click="goToSlide(i)" 
+                        :class="currentSlide === i ? 'bg-v4red w-6' : 'bg-v4border hover:bg-v4gray w-2'" 
+                        class="h-1.5 rounded-full transition-all duration-300"></button>
+            </template>
+        </div>
+
+        <div class="flex items-center space-x-4">
+            <span class="text-xs font-mono text-v4gray">
+                SLIDE <span class="text-white font-bold" x-text="String(currentSlide).padStart(2, '0')"></span> / <span x-text="String(totalSlides).padStart(2, '0')"></span>
+            </span>
+            <button @click="prevSlide()" 
+                    :disabled="currentSlide === 1"
+                    class="bg-v4card hover:bg-v4red disabled:opacity-20 border border-v4border hover:border-v4red text-white p-2 rounded transition-all duration-200">
+                <i data-lucide="chevron-left" class="w-4 h-4"></i>
+            </button>
+            <button @click="nextSlide()" 
+                    :disabled="currentSlide === totalSlides"
+                    class="bg-v4card hover:bg-v4red disabled:opacity-20 border border-v4border hover:border-v4red text-white p-2 rounded transition-all duration-200">
+                <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </button>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
